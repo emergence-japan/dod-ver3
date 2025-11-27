@@ -1,7 +1,7 @@
 // survey.js
 
 // Google Apps Script URL (replace with your deployed URL)
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzG0x6i4XiOrqzp-hzUD_v7srhmc5MuY8nQgug27YoWQ0A4k1dejFfRtm62GBnJpnFXgg/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIrBrR2oeM4aeMmfO1N9KCUKGodV4yf6l4-KnjoAjnF70s5ZLeeT10uwRereFRkjWW/exec';
 
 // Store survey data
 let surveyData = {
@@ -22,21 +22,21 @@ function initializeSurveys() {
 
     // Ethnicity validation removed - all fields now optional
   }
-  
+
   // Post-survey form handling
   const postSurveyForm = document.getElementById('post-survey-form');
   if (postSurveyForm) {
     postSurveyForm.addEventListener('submit', handlePostSurveySubmit);
-    
+
     // Pre-fill anonymous code if available
     const savedCode = sessionStorage.getItem('anonymous_code');
     if (savedCode) {
       const postAnonCode = document.getElementById('post-anonymous-code');
-      if(postAnonCode) {
+      if (postAnonCode) {
         postAnonCode.value = savedCode;
       }
     }
-    
+
     // Progress tracking
     trackSurveyProgress('post-survey-form', 'post-survey-progress', 'post-answered-count', 53);
   }
@@ -48,53 +48,53 @@ function trackSurveyProgress(formId, progressBarId, counterId, total) {
   const progressBar = document.getElementById(progressBarId);
   const counter = document.getElementById(counterId);
   const totalCount = form.querySelector('.total-count');
-  
+
   if (!form || !progressBar) return;
-  
+
   if (totalCount) {
     totalCount.textContent = total;
   }
-  
+
   // Get all required inputs
   const requiredInputs = form.querySelectorAll('[required]');
-  
+
   // Update progress
   function updateProgress() {
     let answered = 0;
     const countedNames = new Set();
 
     requiredInputs.forEach(input => {
-        let isAnswered = false;
-        if (input.type === 'radio' || input.type === 'checkbox') {
-            const name = input.name;
-            if (!countedNames.has(name)) {
-                const checked = form.querySelector(`[name="${name}"]:checked`);
-                if (checked) {
-                    isAnswered = true;
-                    countedNames.add(name);
-                }
-            }
-        } else if (input.value.trim() !== '') {
+      let isAnswered = false;
+      if (input.type === 'radio' || input.type === 'checkbox') {
+        const name = input.name;
+        if (!countedNames.has(name)) {
+          const checked = form.querySelector(`[name="${name}"]:checked`);
+          if (checked) {
             isAnswered = true;
+            countedNames.add(name);
+          }
         }
+      } else if (input.value.trim() !== '') {
+        isAnswered = true;
+      }
 
-        if (isAnswered) {
-            answered++;
-        }
+      if (isAnswered) {
+        answered++;
+      }
     });
-    
+
     const percentage = (answered / total) * 100;
     progressBar.style.width = `${percentage}%`;
-    
+
     if (counter) {
       counter.textContent = answered;
     }
   }
-  
+
   // Listen to all input changes
   form.addEventListener('input', updateProgress);
   form.addEventListener('change', updateProgress);
-  
+
   // Initial update
   updateProgress();
 }
@@ -102,34 +102,34 @@ function trackSurveyProgress(formId, progressBarId, counterId, total) {
 // Ethnicity validation (at least one checkbox)
 function setupEthnicityValidation() {
   const form = document.getElementById('pre-survey-form');
-  if(!form) return;
+  if (!form) return;
 
   const checkboxes = form.querySelectorAll('input[name="ethnicity"]');
   const validationMsg = document.getElementById('ethnicity-validation');
-  
+
   function validate() {
-      const checked = form.querySelectorAll('input[name="ethnicity"]:checked');
-      if (checked.length > 0) {
-        checkboxes.forEach(cb => cb.setCustomValidity(''));
-        if (validationMsg) validationMsg.classList.remove('show');
-        return true;
-      } else {
-        checkboxes.forEach(cb => cb.setCustomValidity('Please select at least one option'));
-        if (validationMsg) {
-          validationMsg.textContent = 'Please select at least one option';
-          validationMsg.classList.add('show');
-        }
-        return false;
+    const checked = form.querySelectorAll('input[name="ethnicity"]:checked');
+    if (checked.length > 0) {
+      checkboxes.forEach(cb => cb.setCustomValidity(''));
+      if (validationMsg) validationMsg.classList.remove('show');
+      return true;
+    } else {
+      checkboxes.forEach(cb => cb.setCustomValidity('Please select at least one option'));
+      if (validationMsg) {
+        validationMsg.textContent = 'Please select at least one option';
+        validationMsg.classList.add('show');
       }
+      return false;
+    }
   }
 
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', validate);
   });
-  
+
   form.addEventListener('submit', (e) => {
     if (!validate()) {
-        e.preventDefault();
+      e.preventDefault();
     }
   });
 }
@@ -141,7 +141,7 @@ function handlePreSurveySubmit(e) {
   const form = e.target;
 
   // No validation required - all fields are optional
-  
+
   // Collect form data
   const formData = new FormData(form);
   const data = {
@@ -151,7 +151,7 @@ function handlePreSurveySubmit(e) {
     self_efficacy: {},
     post_traumatic_growth: {}
   };
-  
+
   // Process demographics
   data.demographics.anonymous_code = formData.get('anonymous_code');
   data.demographics.age = parseInt(formData.get('age'));
@@ -159,40 +159,40 @@ function handlePreSurveySubmit(e) {
   if (data.demographics.gender === 'Other') {
     data.demographics.gender_other = formData.get('gender_other');
   }
-  
+
   // Ethnicity (multiple values)
   data.demographics.ethnicity = formData.getAll('ethnicity');
   if (data.demographics.ethnicity.includes('Other')) {
     data.demographics.ethnicity_other = formData.get('ethnicity_other');
   }
-  
+
   data.demographics.academic_year = formData.get('academic_year');
   if (data.demographics.academic_year === 'Other') {
     data.demographics.academic_year_other = formData.get('academic_year_other');
   }
-  
+
   data.demographics.major = formData.get('major');
   if (data.demographics.major === 'Other') {
     data.demographics.major_other = formData.get('major_other');
   }
-  
+
   data.demographics.work_status = formData.get('work_status');
   data.demographics.marital_status = formData.get('marital_status');
   data.demographics.parental_status = formData.get('parental_status');
-  
+
   // Process Likert scale questions
   for (let i = 10; i <= 17; i++) {
     data.life_satisfaction[`q${i}`] = parseInt(formData.get(`q${i}`));
   }
-  
+
   for (let i = 18; i <= 30; i++) {
     data.self_efficacy[`q${i}`] = parseInt(formData.get(`q${i}`));
   }
-  
+
   for (let i = 31; i <= 45; i++) {
     data.post_traumatic_growth[`q${i}`] = parseInt(formData.get(`q${i}`));
   }
-  
+
   // Store data
   surveyData.preSurvey = data;
 
@@ -271,12 +271,12 @@ function showNotification(message, type = 'info') {
   const notification = document.createElement('div');
   notification.className = `notification notification-${type}`;
   notification.textContent = message;
-  
+
   document.body.appendChild(notification);
-  
+
   // Animate in
   setTimeout(() => notification.classList.add('show'), 100);
-  
+
   // Remove after 3 seconds
   setTimeout(() => {
     notification.classList.remove('show');
@@ -284,93 +284,54 @@ function showNotification(message, type = 'info') {
   }, 3000);
 }
 
-// Send data to Google Sheets
-async function sendToGoogleSheets() {
-  // Flatten all data into a single object matching the GAS specification
-  const preSurvey = surveyData.preSurvey;
-  const gamePlay = surveyData.gamePlay;
-  const postSurvey = surveyData.postSurvey;
+// Send game data to Google Sheets
+async function sendGameData() {
+  // Prepare data object
+  const gameData = {
+    timestamp: new Date().toISOString(),
+    student_id: surveyData.studentInfo?.id || '',
+    student_name: surveyData.studentInfo?.name || '',
 
-  const flatData = {
-    anonymous_code: preSurvey.demographics?.anonymous_code || postSurvey.anonymous_code,
+    // Stage 1 Data
+    stage1_cards: JSON.stringify(surveyData.gamePlay?.stage1?.cards || []),
 
-    // Demographics
-    age: preSurvey.demographics?.age,
-    gender: preSurvey.demographics?.gender,
-    gender_other: preSurvey.demographics?.gender_other || '',
-    ethnicity: Array.isArray(preSurvey.demographics?.ethnicity)
-      ? preSurvey.demographics.ethnicity.join(', ')
-      : preSurvey.demographics?.ethnicity || '',
-    ethnicity_other: preSurvey.demographics?.ethnicity_other || '',
-    academic_year: preSurvey.demographics?.academic_year,
-    academic_year_other: preSurvey.demographics?.academic_year_other || '',
-    major: preSurvey.demographics?.major,
-    major_other: preSurvey.demographics?.major_other || '',
-    work_status: preSurvey.demographics?.work_status,
-    marital_status: preSurvey.demographics?.marital_status,
-    parental_status: preSurvey.demographics?.parental_status,
+    // Stage 2 Data
+    stage2_stories: JSON.stringify(surveyData.gamePlay?.stage2?.selectedCards || []),
+
+    // Stage 3 Data
+    stage3_mode: surveyData.gamePlay?.stage3?.mode || '',
+    stage3_rolls: JSON.stringify(surveyData.gamePlay?.stage3?.rolls || []),
+    stage3_remaining: JSON.stringify(surveyData.gamePlay?.stage3?.remainingCards || []),
+    stage3_lost: JSON.stringify(surveyData.gamePlay?.stage3?.lostCards || []),
+
+    // Interim Message
+    interim_message: surveyData.gamePlay?.interimMessage || ''
   };
-
-  // Pre-Survey Q10-Q45
-  for (let i = 10; i <= 45; i++) {
-    const qKey = `q${i}`;
-    flatData[`pre_q${i}`] = preSurvey.life_satisfaction?.[qKey] ||
-                            preSurvey.self_efficacy?.[qKey] ||
-                            preSurvey.post_traumatic_growth?.[qKey] || '';
-  }
-
-  // Stage 1
-  const stage1Cards = gamePlay.stage1?.cards?.filter(c => c.text !== '') || [];
-  flatData.stage1_total_cards = stage1Cards.length;
-  flatData.stage1_cards_json = JSON.stringify(stage1Cards);
-
-  // Stage 2
-  const stage2Stories = gamePlay.stage2?.selectedCards || [];
-  flatData.stage2_story_count = stage2Stories.length;
-  flatData.stage2_stories_json = JSON.stringify(stage2Stories);
-
-  // Stage 3
-  flatData.stage3_mode = gamePlay.stage3?.mode || '';
-  flatData.stage3_roll_count = gamePlay.stage3?.rolls?.length || 0;
-  flatData.stage3_remaining_count = gamePlay.stage3?.remainingCards?.length || 0;
-  flatData.stage3_lost_count = gamePlay.stage3?.lostCards?.length || 0;
-  flatData.stage3_rolls_json = JSON.stringify(gamePlay.stage3?.rolls || []);
-
-  // Post-Survey Q1-Q52
-  for (let i = 1; i <= 52; i++) {
-    const qKey = `q${i}`;
-    flatData[`post_q${i}`] = postSurvey.life_satisfaction?.[qKey] ||
-                             postSurvey.self_efficacy?.[qKey] ||
-                             postSurvey.post_traumatic_growth?.[qKey] ||
-                             postSurvey.learning_engagement?.[qKey] || '';
-  }
-
-  // Post-Survey Q53 (Open-ended feedback)
-  flatData.post_q53 = postSurvey.feedback || '';
-
-  // Interim Message
-  flatData.interim_message = gamePlay.interimMessage || '';
 
   // Send to Google Sheets
   try {
-    console.log('Sending data to Google Sheets:', flatData);
+    console.log('Sending game data:', gameData);
+
+    // Use URLSearchParams to send data as query parameters (GET request) or body (POST)
+    // Since we are using no-cors, we can't read the response, but we can send data.
+    // Ideally, we should use POST with text/plain to avoid CORS preflight issues if possible,
+    // or just rely on the script to handle the POST data.
+
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', 
+      mode: 'no-cors',
       cache: 'no-cache',
       headers: {
         'Content-Type': 'text/plain;charset=utf-8',
       },
-      body: JSON.stringify(flatData),
-      redirect: 'follow'
+      body: JSON.stringify(gameData)
     });
 
-    console.log('Data sent to Google Sheets. The request was made, but the response is opaque due to no-cors mode.');
+    console.log('Data sent to Google Sheets.');
     return true;
   } catch (error) {
-    console.error('Error sending data to Google Sheets:', error);
-    console.log('Failed data:', JSON.stringify(flatData));
-    return false;
+    console.error('Error sending data:', error);
+    throw error;
   }
 }
 

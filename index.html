@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,1046 +10,80 @@
   <link rel="stylesheet" href="css/survey.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
   <section id="welcome" class="screen active">
     <div class="content-wrapper">
       <h1 class="title">The Dice of Destiny</h1>
-      <span class="subtitle">A game where you learn the value of life through loss</span>
-      <p class="tagline">Simulated loss game</p>
-      <button class="btn-primary" onclick="navigateTo('important-notes')">
-        Begin Your Journey
-      </button>
+      <span class="subtitle">喪失を通じて生の価値を学ぶゲーム</span>
+
+      <div class="student-info-form">
+        <div class="form-group">
+          <label for="student-id" style="display: block; margin-bottom: 0.5rem; color: var(--text-color);">学籍番号</label>
+          <input type="text" id="student-id" class="text-input" placeholder="学籍番号を入力してください" required
+            style="margin-bottom: 1rem; width: 100%; max-width: 300px;">
+        </div>
+        <div class="form-group">
+          <label for="student-name" style="display: block; margin-bottom: 0.5rem; color: var(--text-color);">氏名</label>
+          <input type="text" id="student-name" class="text-input" placeholder="氏名を入力してください" required
+            style="margin-bottom: 1.5rem; width: 100%; max-width: 300px;">
+        </div>
+        <button class="btn-primary" onclick="startNewGame()">
+          ゲームを始める
+        </button>
+      </div>
     </div>
   </section>
 
   <section id="important-notes" class="screen">
     <div class="content-wrapper">
-      <h2>Important Notes</h2>
-      
+      <h2>重要な注意事項</h2>
+
       <div class="notes-box">
-        <h3>About This Experience</h3>
+        <h3>この体験について</h3>
         <ul>
-          <li>This is a game. Your experience while playing differs from reality.</li>
-          <li>Participation in and discontinuation of this game are entirely at your discretion.</li>
-          <li>Participation in the game and its outcomes will not affect any individual's evaluation.</li>
-          <li>If you feel uncomfortable during play, you may immediately stop the game.</li>
-          <li>No one can force you to participate in or continue playing the game.</li>
+          <li>これはゲームです。プレイ中の体験は現実とは異なります。</li>
+          <li>このゲームへの参加および中止は、完全にあなたの自由意志によります。</li>
+          <li>ゲームへの参加やその結果が、個人の評価に影響することはありません。</li>
+          <li>プレイ中に不快感を感じた場合は、すぐにゲームを中止することができます。</li>
+          <li>誰もあなたにゲームへの参加や継続を強制することはできません。</li>
         </ul>
       </div>
-      
-      <div class="notes-box">
-        <h3>Survey Request</h3>
-        <ul>
-          <li>Surveys will be conducted before and after playing to study the game's effects.</li>
-          <li>Data collected in the surveys will be processed statistically; personal information will not be disclosed.</li>
-          <li>We require responses from as many participants as possible. Your cooperation is greatly appreciated.</li>
-        </ul>
-      </div>
-      
+
+
+
       <div class="time-estimate">
-        <p><strong>Estimated Time:</strong> Approximately 30 minutes</p>
-        <p><em>Please ensure you have enough time to complete the entire experience.</em></p>
+        <p><strong>所要時間:</strong> 約30分</p>
+        <p><em>時間に余裕を持って体験を完了できるようにしてください。</em></p>
       </div>
-      
-      <button class="btn-primary" onclick="navigateTo('pre-survey')">
-        I Understand, Proceed to Survey
+
+      <button class="btn-primary" onclick="navigateTo('opening-story-1')">
+        理解して体験を始める
       </button>
-    </div>
-  </section>
-
-  <section id="pre-survey" class="screen">
-    <div class="content-wrapper survey-wrapper">
-      <h2>Pre-Survey</h2>
-      <p class="survey-intro">
-        Before beginning the experience, please answer the following questions.
-        Your responses will help us understand the impact of this educational game.
-        All responses are anonymous.
-      </p>
-      
-      <form id="pre-survey-form" class="survey-form">
-        
-        <!-- Progress Indicator -->
-        <div class="survey-progress">
-          <div class="progress-bar">
-            <div class="progress-fill" id="pre-survey-progress"></div>
-          </div>
-          <p class="progress-text">
-            <span id="answered-count">0</span> of <span class="total-count">45</span> questions answered
-          </p>
-        </div>
-        
-        <!-- Section 0: Demographics -->
-        <div class="survey-section">
-
-          <!-- Q1: Anonymous Code -->
-          <div class="question-group">
-            <label for="anonymous-code" class="question-label">
-              Q1: Anonymous Code
-            </label>
-
-            <input
-              type="text"
-              id="anonymous-code"
-              name="anonymous_code"
-              class="text-input"
-              minlength="3"
-              maxlength="20"
-              placeholder="Enter a memorable code (e.g., abc123)"
-            />
-            <p class="input-hint">
-              💡 Combine (1) your birth month and day (MMDD) and (2) the first letter of the city where you were born.<br>
-              <strong>Example:</strong> If you were born on May 9 in Seattle → 0509S.
-            </p>
-          </div>
-          
-          <!-- Q2: Age -->
-          <div class="question-group">
-            <label for="age" class="question-label">
-              Q2: What is your age?
-            </label>
-            <div class="age-input-wrapper">
-              <input
-                type="number"
-                id="age"
-                name="age"
-                class="number-input"
-                min="18"
-                max="120"
-                placeholder="25"
-              />
-              <span class="input-suffix">y/o</span>
-            </div>
-          </div>
-          
-          <!-- Q3: Gender -->
-          <div class="question-group">
-            <label class="question-label">Q3: Gender</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="gender" value="Female" />
-                <span>Female</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="gender" value="Male" />
-                <span>Male</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="gender" value="Non-binary / Third gender" />
-                <span>Non-binary / Third gender</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="gender" value="Other" />
-                <span>Prefer to self-describe:</span>
-                <input
-                  type="text"
-                  name="gender_other"
-                  class="text-input-inline"
-                  placeholder="Please specify"
-                />
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="gender" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Q4: Ethnicity/Race (Multiple Select) -->
-          <div class="question-group">
-            <label class="question-label">
-              Q4: What is your ethnicity/race? (Select all that apply)
-            </label>
-            <div class="checkbox-group">
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="White / Caucasian" />
-                <span>White / Caucasian</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Black / African American" />
-                <span>Black / African American</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Hispanic / Latino / Latina / Latinx" />
-                <span>Hispanic / Latino / Latina / Latinx</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Asian / Asian American" />
-                <span>Asian / Asian American</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Native American / Alaska Native" />
-                <span>Native American / Alaska Native</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Native Hawaiian / Pacific Islander" />
-                <span>Native Hawaiian / Pacific Islander</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Middle Eastern / North African" />
-                <span>Middle Eastern / North African</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Other" />
-                <span>Other:</span>
-                <input 
-                  type="text" 
-                  name="ethnicity_other" 
-                  class="text-input-inline"
-                  placeholder="Please specify"
-                />
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="ethnicity" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-            <p class="validation-message" id="ethnicity-validation"></p>
-          </div>
-          
-          <!-- Q5: Academic Year -->
-          <div class="question-group">
-            <label class="question-label">Q5: Academic Year</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Freshman / First-year" />
-                <span>Freshman / First-year</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Sophomore / Second-year" />
-                <span>Sophomore / Second-year</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Junior / Third-year" />
-                <span>Junior / Third-year</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Senior / Fourth-year" />
-                <span>Senior / Fourth-year</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Graduate student" />
-                <span>Graduate student</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Other" />
-                <span>Other:</span>
-                <input
-                  type="text"
-                  name="academic_year_other"
-                  class="text-input-inline"
-                  placeholder="Please specify"
-                />
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="academic_year" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Q6: Major Program of Study -->
-          <div class="question-group">
-            <label class="question-label">
-              Q6: Please let us know your Major Program of Study (online course only)
-            </label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="major" value="Psychology" />
-                <span>Psychology</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Biology" />
-                <span>Biology</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Business / Economics" />
-                <span>Business / Economics</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Education" />
-                <span>Education</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Nursing / Health Sciences" />
-                <span>Nursing / Health Sciences</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Other" />
-                <span>Other:</span>
-                <input
-                  type="text"
-                  name="major_other"
-                  class="text-input-inline"
-                  placeholder="Please specify"
-                />
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="major" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Q7: Work/Student Status -->
-          <div class="question-group">
-            <label class="question-label">
-              Q7: Please let us know your work/student status
-            </label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Full-time student, not employed" />
-                <span>Full-time student, not employed</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Part-time student, not employed" />
-                <span>Part-time student, not employed</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Employed part-time" />
-                <span>Employed part-time</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Employed full-time" />
-                <span>Employed full-time</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Unemployed / Not currently working" />
-                <span>Unemployed / Not currently working</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="work_status" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Q8: Marital Status -->
-          <div class="question-group">
-            <label class="question-label">
-              Q8: What is your marital status/relationship status?
-            </label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="marital_status" value="Single / Never married" />
-                <span>Single / Never married</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="marital_status" value="Married / Domestic partnership" />
-                <span>Married / Domestic partnership</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="marital_status" value="Separated / Divorced" />
-                <span>Separated / Divorced</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="marital_status" value="Widowed" />
-                <span>Widowed</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="marital_status" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Q9: Parental Status -->
-          <div class="question-group">
-            <label class="question-label">Q9: Parental Status</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="parental_status" value="I have a child/children" />
-                <span>I have a child/children</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="parental_status" value="I do not have children" />
-                <span>I do not have children</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="parental_status" value="Prefer not to answer" />
-                <span>Prefer not to answer</span>
-              </label>
-            </div>
-          </div>
-          
-        </div>
-        <!-- End Section 0 -->
-        
-        <!-- Section 1: Life Satisfaction (Q10-Q17) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§1.</strong> The following statements ask you to evaluate your overall satisfaction with your life. There are no right or wrong answers. Please respond honestly according to how you feel.
-          </p>
-
-          <div class="likert-questions">
-            <!-- Q10 -->
-            <div class="likert-question">
-              <label class="question-label">Q10: I am satisfied with my life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q10" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q10" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q11 -->
-            <div class="likert-question">
-              <label class="question-label">Q11: The conditions of my life are excellent.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q11" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q11" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q12 -->
-            <div class="likert-question">
-              <label class="question-label">Q12: I am doing well in my life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q12" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q12" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q13 -->
-            <div class="likert-question">
-              <label class="question-label">Q13: I have gotten the important things I want in life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q13" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q13" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q14 -->
-            <div class="likert-question">
-              <label class="question-label">Q14: If I could live my life over, I would change almost nothing.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q14" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q14" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q15 -->
-            <div class="likert-question">
-              <label class="question-label">Q15: My life is full of value.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q15" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q15" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q16 -->
-            <div class="likert-question">
-              <label class="question-label">Q16: My personal existence is significant.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q16" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q16" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q17 -->
-            <div class="likert-question">
-              <label class="question-label">Q17: Every day, I experience the sense that life is worth living.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q17" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q17" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Section 1 -->
-        
-        <!-- Section 2: Self-Efficacy (Q18-Q30) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§2.</strong> For each statement below, please indicate how confident you are that you can perform the behavior when you face challenges or difficult situations.
-          </p>
-
-            <div class="likert-questions">
-            <!-- Q18 -->
-            <div class="likert-question">
-              <label class="question-label">Q18: Break an upsetting problem down into smaller parts</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q18" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q18" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q19 -->
-            <div class="likert-question">
-              <label class="question-label">Q19: Persist in solving a problem even when it seems difficult</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q19" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q19" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q20 -->
-            <div class="likert-question">
-              <label class="question-label">Q20: Make unpleasant thoughts go away</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q20" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q20" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q21 -->
-            <div class="likert-question">
-              <label class="question-label">Q21: Think positively about your future</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q21" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q21" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q22 -->
-            <div class="likert-question">
-              <label class="question-label">Q22: Control your negative thoughts</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q22" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q22" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q23 -->
-            <div class="likert-question">
-              <label class="question-label">Q23: Stop yourself from being upset by unpleasant thoughts</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q23" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q23" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q24 -->
-            <div class="likert-question">
-              <label class="question-label">Q24: Keep from feeling sad</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q24" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q24" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q25 -->
-            <div class="likert-question">
-              <label class="question-label">Q25: Make friends</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q25" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q25" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q26 -->
-            <div class="likert-question">
-              <label class="question-label">Q26: Get emotional support from friends and family</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q26" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q26" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q27 -->
-            <div class="likert-question">
-              <label class="question-label">Q27: Get friends to help you with the things you need</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q27" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q27" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q28 -->
-            <div class="likert-question">
-              <label class="question-label">Q28: Get emotional support from community organizations</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q28" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q28" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q29 -->
-            <div class="likert-question">
-              <label class="question-label">Q29: Ask people in your community for help when you need it</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q29" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q29" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q30 -->
-            <div class="likert-question">
-              <label class="question-label">Q30: Get emotional support from outside the family</label>
-              <div class="likert-scale">
-                <span class="scale-label">Cannot do at all</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q30" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q30" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Section 2 -->
-
-        <!-- Section 3: Post-Traumatic Growth (Q31-Q45) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§3.</strong> For each of the following statements, indicate how much change you experienced, if any change at all, as a result of the event that you nominated earlier.<br>
-            <em>Because of this event…</em>
-          </p>
-
-            <div class="likert-questions">
-            <!-- Q31 -->
-            <div class="likert-question">
-              <label class="question-label">Q31: I experienced a change in how I treat others.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q31" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q31" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q32 -->
-            <div class="likert-question">
-              <label class="question-label">Q32: I experienced a change in the extent to which I feel free to make my own decisions.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q32" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q32" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q33 -->
-            <div class="likert-question">
-              <label class="question-label">Q33: I experienced a change in my belief that I have something of value to teach others about life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q33" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q33" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q34 -->
-            <div class="likert-question">
-              <label class="question-label">Q34: I experienced a change in the extent to which I can be myself and not try to be what others want me to be.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q34" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q34" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q35 -->
-            <div class="likert-question">
-              <label class="question-label">Q35: I experienced a change in the extent to which I work through problems and not just give up.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q35" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q35" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q36 -->
-            <div class="likert-question">
-              <label class="question-label">Q36: I experienced a change in the extent to which I find meaning in life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q36" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q36" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q37 -->
-            <div class="likert-question">
-              <label class="question-label">Q37: I experienced a change in the extent to which I reach out and help others.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q37" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q37" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q38 -->
-            <div class="likert-question">
-              <label class="question-label">Q38: I experienced a change in the extent to which I am a confident person.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q38" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q38" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q39 -->
-            <div class="likert-question">
-              <label class="question-label">Q39: I experienced a change in the extent to which I listen when others talk to me.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q39" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q39" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q40 -->
-            <div class="likert-question">
-              <label class="question-label">Q40: I experienced a change in the extent to which I am open to new information and ideas.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q40" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q40" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q41 -->
-            <div class="likert-question">
-              <label class="question-label">Q41: I experienced a change in the extent to which I communicate honestly with others.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q41" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q41" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Certain can do</span>
-              </div>
-            </div>
-            <!-- Q42 -->
-            <div class="likert-question">
-              <label class="question-label">Q42: I experienced a change in my desire to have some impact on the world.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q42" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q42" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">A very positive change</span>
-              </div>
-            </div>
-            <!-- Q43 -->
-            <div class="likert-question">
-              <label class="question-label">Q43: I experienced a change in my belief that it's OK to ask others for help.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q43" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q43" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">A very positive change</span>
-              </div>
-            </div>
-            <!-- Q44 -->
-            <div class="likert-question">
-              <label class="question-label">Q44: I experienced a change in the extent to which I stand up for my personal rights.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q44" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q44" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">A very positive change</span>
-              </div>
-            </div>
-            <!-- Q45 -->
-            <div class="likert-question">
-              <label class="question-label">Q45: I experienced a change in my belief about how many people care about me.</label>
-              <div class="likert-scale">
-                <span class="scale-label">A very negative change</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q45" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q45" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">A very positive change</span>
-              </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Section 3 -->
-        
-        <!-- Submit Button -->
-        <div class="form-actions">
-          <button type="submit" class="btn-primary" id="pre-survey-submit">
-            Complete Survey & Begin Experience
-          </button>
-        </div>
-        
-      </form>
     </div>
   </section>
 
   <section id="opening-story-1" class="screen story-screen">
     <div class="content-wrapper story-content">
       <div class="story-text">
-        <p>Suddenly, everything around you fades into darkness.</p>
-        <p>When you open your eyes again, you find yourself in a strange, unfamiliar world.</p>
-        <p>In front of you stands a child, dressed in a bizarre and colorful costume.</p>
-        <p>As your eyes meet, the child begins to speak directly to you:</p>
+        <p>突然、あなたの周りのすべてが暗闇に包まれます。</p>
+        <p>再び目を開けると、あなたは奇妙で見知らぬ世界にいました。</p>
+        <p>目の前には、奇抜でカラフルな衣装を着た子供が立っています。</p>
+        <p>目が合うと、その子供はあなたに語りかけてきました。</p>
         <blockquote>
-          "I'm speaking to your heart. You've been struck by an unexpected misfortune. 
-          Life may never be the same again. This accident is so great that you could 
-          lose everything you hold dear."
+          「君の心に話しかけているよ。君は予期せぬ不幸に見舞われたんだ。
+          人生はもう二度と元には戻らないかもしれない。この事故はあまりにも大きく、
+          君が大切にしているすべてを失ってしまうかもしれないんだ。」
         </blockquote>
-        <p class="story-emphasis">You stare in confusion, not quite understanding what's happening—</p>
+        <p class="story-emphasis">あなたは何が起きているのか理解できず、困惑して見つめ返します……</p>
       </div>
       <button class="btn-secondary" onclick="navigateTo('opening-story-2')">
-        Continue →
+        次へ ➡
       </button>
     </div>
   </section>
@@ -1056,20 +91,20 @@
   <section id="opening-story-2" class="screen story-screen">
     <div class="content-wrapper story-content">
       <div class="story-text">
-        <p>"I know you're probably thinking, 'What on earth are you talking about?' That's natural. 
-        But please, trust me. What you're about to experience is deeply connected to your real life."</p>
-        <p>You barely have time to process this before another surprise comes.</p>
-        <p>"You're not the only one who has faced this misfortune. Others have too. And together, 
-        you've been given a chance—to use something called <strong>the Dice of Destiny</strong>."</p>
-        <p>The child leans closer, lowering their voice as if to emphasize the point:</p>
+        <p>「『一体何を言っているんだ？』と思っているだろうね。それは当然だ。
+          でも、お願いだ、僕を信じて。君がこれから体験することは、君の現実の人生と深くつながっているんだ。」</p>
+        <p>あなたがその言葉を処理する間もなく、さらなる驚きが訪れます。</p>
+        <p>「この不幸に直面したのは君だけじゃない。他の人たちもそうだ。そして、
+          君たちはチャンスを与えられたんだ――<strong>『運命のサイコロ』</strong>と呼ばれるものを使うチャンスをね。」</p>
+        <p>子供は身を乗り出し、その重要性を強調するかのように声を潜めました。</p>
         <blockquote>
-          "This is the most important thing, so don't forget it. By rolling this dice, you may be 
-          able to protect what matters most to you. In fact, it could even lead you to a life 
-          better than the one you have now."
+          「これは一番大事なことだから、忘れないで。このサイコロを振ることで、
+          君は最も大切なものを守れるかもしれない。それどころか、
+          今よりももっと良い人生へと導かれるかもしれないんだ。」
         </blockquote>
       </div>
       <button class="btn-secondary" onclick="navigateTo('opening-story-3')">
-        Continue →
+        次へ ➡
       </button>
     </div>
   </section>
@@ -1077,1411 +112,423 @@
   <section id="opening-story-3" class="screen story-screen">
     <div class="content-wrapper story-content">
       <div class="story-text">
-        <p>Just as you begin to wish for a clearer explanation—</p>
-        <p>"I know you want me to explain everything in detail," the child interrupts, 
-        "but there isn't time. It's about to begin."</p>
-        <p>You feel a wave of uncertainty, yet your expression shifts to one of determination.</p>
-        <p>"Thank you for listening," the child continues. "Now, you'll write down the things that 
-        are most important to you on cards. As many as you can. Then, you'll join others who have 
-        also written their important things, and together you'll roll the Dice of Destiny."</p>
-        <p>The child suddenly raises a finger as if to warn you:</p>
+        <p>あなたがもっと明確な説明を求めようとしたその時……</p>
+        <p>「詳しく説明してほしいのはわかるよ」と子供は遮ります。
+          「でも時間がないんだ。もう始まるよ。」</p>
+        <p>あなたは不安を感じつつも、その表情は決意へと変わっていきます。</p>
+        <p>「聞いてくれてありがとう」と子供は続けます。「さあ、君にとって最も大切なものを
+          カードに書き出すんだ。できるだけたくさんね。そして、同じように大切なものを書いた
+          他の人たちと一緒に、運命のサイコロを振るんだ。」</p>
+        <p>子供は突然、警告するかのように指を立てました。</p>
         <blockquote>
-          "Oh! Remember—you must follow the Master's instructions. Don't act on your own. 
-          I truly hope that your life will become better through this."
+          「あ！ 覚えておいて――マスターの指示には必ず従うこと。勝手な行動はしちゃいけないよ。
+          君の人生がこれによって良くなることを、心から願っているよ。」
         </blockquote>
-        <p class="story-emphasis">With those final words, the child fades from your sight—vanishing 
-        as quickly as they appeared.</p>
+        <p class="story-emphasis">その最後の言葉と共に、子供はあなたの視界から消えていきました――
+          現れたときと同じくらい素早く。</p>
       </div>
       <button class="btn-primary" onclick="navigateTo('stage1')">
-        Begin Stage 1
+        ステージ1を開始
       </button>
     </div>
   </section>
 
   <section id="stage1" class="screen">
     <div class="content-wrapper stage-wrapper">
-      
+
       <!-- Stage Header -->
       <div class="stage-header">
-        <h2>Stage 1: Creating Precious Thing Cards</h2>
+        <h2>ステージ1: 大切なものカードの作成</h2>
         <p class="stage-mission">
-          <strong>Mission:</strong> List the Things That Are Precious to You.
+          <strong>ミッション:</strong> あなたにとって大切なものを挙げてください。
         </p>
         <p class="stage-goal">
-          <strong>Goal:</strong> Write down at least 5 things that are truly important to you, 
-          then place the cards on your board.
+          <strong>ゴール:</strong> 本当に大切なものを5つ以上書き出し、ボードにカードを配置してください。
         </p>
         <p class="stage-time">
-          <strong>Estimated Time:</strong> 5-10 minutes
+          <strong>所要時間:</strong> 5-10分
         </p>
       </div>
-      
+
       <!-- Guide Questions -->
       <div class="guide-box">
-        <h3>Guide Questions to Help You:</h3>
+        <h3>ヒントとなる質問:</h3>
         <ul>
-          <li>Looking back, is there a place you feel is important to you? Where is it?</li>
-          <li>Who is the most important person in your life?</li>
-          <li>What unforgettable event from your past stands out?</li>
-          <li>What do you hold dear?</li>
-          <li>What is a meaningful goal for you?</li>
+          <li>振り返ってみて、大切だと感じる場所はありますか？それはどこですか？</li>
+          <li>あなたの人生で最も大切な人は誰ですか？</li>
+          <li>過去の忘れられない出来事は何ですか？</li>
+          <li>あなたが大切にしているものは何ですか？</li>
+          <li>あなたにとって意味のある目標は何ですか？</li>
         </ul>
         <p class="guide-note">
-          There are no right or wrong answers. Just write down whatever comes to mind.
+          正解や不正解はありません。思いついたことをそのまま書いてください。
         </p>
       </div>
-      
+
       <!-- Card Grid -->
       <div class="card-grid">
         <!-- Items Column (Green) -->
         <div class="card-column" data-category="items">
           <h3 class="category-header items-header">
-            <span class="category-icon">🎁</span>
-            Items
+            <span class="category-icon">💎</span>
+            モノ
           </h3>
           <div class="card-slot" data-position="1" data-category="items">
-            <input 
-              type="text" 
-              class="card-input" 
-              placeholder="What item is important?"
-              data-card-id="items-1"
-            />
+            <input type="text" class="card-input" placeholder="大切なモノは？" data-card-id="items-1" />
           </div>
           <div class="card-slot" data-position="2" data-category="items">
-            <input type="text" class="card-input" placeholder="Another item?" data-card-id="items-2" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="items-2" />
           </div>
           <div class="card-slot" data-position="3" data-category="items">
-            <input type="text" class="card-input" placeholder="Another item?" data-card-id="items-3" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="items-3" />
           </div>
           <div class="card-slot" data-position="4" data-category="items">
-            <input type="text" class="card-input" placeholder="Another item?" data-card-id="items-4" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="items-4" />
           </div>
           <div class="card-slot" data-position="5" data-category="items">
-            <input type="text" class="card-input" placeholder="Another item?" data-card-id="items-5" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="items-5" />
           </div>
         </div>
-        
+
         <!-- Person Column (Pink) -->
         <div class="card-column" data-category="person">
           <h3 class="category-header person-header">
             <span class="category-icon">👤</span>
-            Person
+            人
           </h3>
           <div class="card-slot" data-position="6" data-category="person">
-            <input type="text" class="card-input" placeholder="Who is important?" data-card-id="person-1" />
+            <input type="text" class="card-input" placeholder="大切な人は？" data-card-id="person-1" />
           </div>
           <div class="card-slot" data-position="7" data-category="person">
-            <input type="text" class="card-input" placeholder="Another person?" data-card-id="person-2" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="person-2" />
           </div>
           <div class="card-slot" data-position="8" data-category="person">
-            <input type="text" class="card-input" placeholder="Another person?" data-card-id="person-3" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="person-3" />
           </div>
           <div class="card-slot" data-position="9" data-category="person">
-            <input type="text" class="card-input" placeholder="Another person?" data-card-id="person-4" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="person-4" />
           </div>
           <div class="card-slot" data-position="10" data-category="person">
-            <input type="text" class="card-input" placeholder="Another person?" data-card-id="person-5" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="person-5" />
           </div>
         </div>
-        
+
         <!-- Places Column (Blue) -->
         <div class="card-column" data-category="places">
           <h3 class="category-header places-header">
-            <span class="category-icon">📍</span>
-            Places
+            <span class="category-icon">🏞️</span>
+            場所
           </h3>
           <div class="card-slot" data-position="11" data-category="places">
-            <input type="text" class="card-input" placeholder="What place is important?" data-card-id="places-1" />
+            <input type="text" class="card-input" placeholder="大切な場所は？" data-card-id="places-1" />
           </div>
           <div class="card-slot" data-position="12" data-category="places">
-            <input type="text" class="card-input" placeholder="Another place?" data-card-id="places-2" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="places-2" />
           </div>
           <div class="card-slot" data-position="13" data-category="places">
-            <input type="text" class="card-input" placeholder="Another place?" data-card-id="places-3" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="places-3" />
           </div>
           <div class="card-slot" data-position="14" data-category="places">
-            <input type="text" class="card-input" placeholder="Another place?" data-card-id="places-4" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="places-4" />
           </div>
           <div class="card-slot" data-position="15" data-category="places">
-            <input type="text" class="card-input" placeholder="Another place?" data-card-id="places-5" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="places-5" />
           </div>
         </div>
-        
+
         <!-- Events Column (Yellow) -->
         <div class="card-column" data-category="events">
           <h3 class="category-header events-header">
-            <span class="category-icon">⭐</span>
-            Events
+            <span class="category-icon">🎉</span>
+            出来事
           </h3>
           <div class="card-slot" data-position="16" data-category="events">
-            <input type="text" class="card-input" placeholder="What event is important?" data-card-id="events-1" />
+            <input type="text" class="card-input" placeholder="大切な出来事は？" data-card-id="events-1" />
           </div>
           <div class="card-slot" data-position="17" data-category="events">
-            <input type="text" class="card-input" placeholder="Another event?" data-card-id="events-2" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="events-2" />
           </div>
           <div class="card-slot" data-position="18" data-category="events">
-            <input type="text" class="card-input" placeholder="Another event?" data-card-id="events-3" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="events-3" />
           </div>
           <div class="card-slot" data-position="19" data-category="events">
-            <input type="text" class="card-input" placeholder="Another event?" data-card-id="events-4" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="events-4" />
           </div>
           <div class="card-slot" data-position="20" data-category="events">
-            <input type="text" class="card-input" placeholder="Another event?" data-card-id="events-5" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="events-5" />
           </div>
         </div>
-        
+
         <!-- Goals Column (Purple) -->
         <div class="card-column" data-category="goals">
           <h3 class="category-header goals-header">
             <span class="category-icon">🎯</span>
-            Goals
+            目標
           </h3>
           <div class="card-slot" data-position="21" data-category="goals">
-            <input type="text" class="card-input" placeholder="What goal is important?" data-card-id="goals-1" />
+            <input type="text" class="card-input" placeholder="大切な目標は？" data-card-id="goals-1" />
           </div>
           <div class="card-slot" data-position="22" data-category="goals">
-            <input type="text" class="card-input" placeholder="Another goal?" data-card-id="goals-2" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="goals-2" />
           </div>
           <div class="card-slot" data-position="23" data-category="goals">
-            <input type="text" class="card-input" placeholder="Another goal?" data-card-id="goals-3" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="goals-3" />
           </div>
           <div class="card-slot" data-position="24" data-category="goals">
-            <input type="text" class="card-input" placeholder="Another goal?" data-card-id="goals-4" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="goals-4" />
           </div>
           <div class="card-slot" data-position="25" data-category="goals">
-            <input type="text" class="card-input" placeholder="Another goal?" data-card-id="goals-5" />
+            <input type="text" class="card-input" placeholder="他には？" data-card-id="goals-5" />
           </div>
         </div>
       </div>
-      
+
       <!-- Validation Panel -->
       <div class="validation-panel">
         <div class="validation-item">
-          <span class="validation-label">Total Cards:</span>
+          <span class="validation-label">合計カード数:</span>
           <span class="validation-value" id="total-cards-count">0 / 25</span>
-          <span class="validation-status" id="total-cards-status">⚠️ Need at least 5</span>
+          <span class="validation-status" id="total-cards-status">⚠️ 最低5枚必要</span>
         </div>
         <div class="validation-item">
-          <span class="validation-label">Items:</span>
+          <span class="validation-label">モノ:</span>
           <span class="validation-value" id="items-count">0</span>
           <span class="validation-status" id="items-status">⚠️</span>
         </div>
         <div class="validation-item">
-          <span class="validation-label">Person:</span>
+          <span class="validation-label">人:</span>
           <span class="validation-value" id="person-count">0</span>
           <span class="validation-status" id="person-status">⚠️</span>
         </div>
         <div class="validation-item">
-          <span class="validation-label">Places:</span>
+          <span class="validation-label">場所:</span>
           <span class="validation-value" id="places-count">0</span>
           <span class="validation-status" id="places-status">⚠️</span>
         </div>
         <div class="validation-item">
-          <span class="validation-label">Events:</span>
+          <span class="validation-label">出来事:</span>
           <span class="validation-value" id="events-count">0</span>
           <span class="validation-status" id="events-status">⚠️</span>
         </div>
         <div class="validation-item">
-          <span class="validation-label">Goals:</span>
+          <span class="validation-label">目標:</span>
           <span class="validation-value" id="goals-count">0</span>
           <span class="validation-status" id="goals-status">⚠️</span>
         </div>
       </div>
-      
-      <button 
-        class="btn-primary" 
-        id="stage1-next" 
-        onclick="completeStage1()" 
-        disabled
-      >
-        Proceed to Stage 2
+
+      <button class="btn-primary" id="stage1-next" onclick="completeStage1()" disabled>
+        ステージ2へ進む
       </button>
-      
+
     </div>
   </section>
 
   <section id="stage2" class="screen">
     <div class="content-wrapper stage-wrapper">
       <div class="stage-header">
-        <h2>Stage 2: Writing Stories</h2>
+        <h2>ステージ2: 物語を書く</h2>
         <p class="stage-mission">
-          <strong>Mission:</strong> Share the stories behind your cards.
+          <strong>ミッション:</strong> カードの背景にある物語を共有してください。
         </p>
         <p class="stage-goal">
-          <strong>Goal:</strong> Writing up a story.
+          <strong>ゴール:</strong> 物語を書き上げる。
         </p>
       </div>
-      
+
       <div class="instruction-box">
         <p>
-          Select at least one card and write a story about why it's important to you. 
-          Write as if you're telling someone about it.
+          少なくとも1枚のカードを選び、なぜそれが大切なのか物語を書いてください。
+          誰かに話して聞かせるように書いてみましょう。
         </p>
         <p class="example-text">
-          <strong>Example:</strong> "This place is my family's living room. It's where we 
-          always gathered, and we've had many experiences here. So..."
+          <strong>例:</strong> 「この場所は家族のリビングルームです。いつもみんなで集まって、
+          たくさんの思い出があります。だから……」
         </p>
       </div>
-      
+
       <!-- Card Selection Area -->
       <div class="card-selection">
-        <h3>Your Cards (click to select):</h3>
+        <h3>あなたのカード (クリックして選択):</h3>
         <div id="stage2-cards" class="card-list">
           <!-- Cards populated by JavaScript -->
         </div>
       </div>
-      
+
       <!-- Story Input Area -->
       <div id="story-input-area" class="story-input-area">
         <!-- Story text areas populated by JavaScript when cards selected -->
       </div>
-      
+
       <div class="validation-feedback">
-        <p>Stories written: <span id="story-count">0</span> (minimum: 1)</p>
+        <p>書かれた物語: <span id="story-count">0</span> (最低: 1)</p>
       </div>
-      
+
       <button class="btn-primary" id="stage2-next" onclick="completeStage2()" disabled>
-        Proceed to Stage 3
+        ステージ3へ進む
       </button>
     </div>
   </section>
 
   <section id="stage3" class="screen">
     <div class="content-wrapper stage-wrapper wide">
-      
+
       <!-- Difficulty Selection (shown first) -->
       <div id="difficulty-selection" class="difficulty-selection">
-        <h2>Stage 3: Roll the Dice of Destiny</h2>
-        <p>Before you begin, select your challenge</p>
-        
+        <h2>ステージ3: 運命のサイコロを振る</h2>
+        <p>始める前に、難易度を選択してください</p>
+
         <div class="difficulty-options">
           <div class="difficulty-card" onclick="selectDifficulty('EASY')">
-            <h3>EASY MODE</h3>
-            <p>Lose 1-6 cards per roll</p>
-            <button class="btn-secondary">Select Easy</button>
+            <h3>イージーモード</h3>
+            <p>1回につき1〜6枚のカードを失います</p>
+            <button class="btn-secondary">イージーを選択</button>
           </div>
-          
+
           <div class="difficulty-card" onclick="selectDifficulty('HARD')">
-            <h3>HARD MODE</h3>
-            <p>Lose 3-8 cards per roll</p>
-            <button class="btn-secondary">Select Hard</button>
+            <h3>ハードモード</h3>
+            <p>1回につき3〜8枚のカードを失います</p>
+            <button class="btn-secondary">ハードを選択</button>
           </div>
         </div>
       </div>
-      
+
       <!-- Game Interface (hidden initially) -->
       <div id="game-interface" class="game-interface" style="display: none;">
         <div class="game-header">
-          <h2>Stage 3: Roll Dice of Destiny (<span id="difficulty-display"></span> MODE)</h2>
-          <p>Roll #<span id="roll-number">1</span> (Minimum 4 rolls required)</p>
+          <h2>ステージ3: 運命のサイコロを振る (<span id="difficulty-display"></span> モード)</h2>
+          <p>ロール #<span id="roll-number">1</span> (最低4回)</p>
         </div>
-        
+
         <div class="game-layout">
           <!-- Left: Remaining Cards -->
           <div class="remaining-cards">
-            <h3>Remaining Cards (<span id="remaining-count">0</span>)</h3>
+            <h3>残りのカード (<span id="remaining-count">0</span>)</h3>
             <div id="remaining-cards-list" class="cards-list">
               <!-- Cards populated by JavaScript -->
             </div>
           </div>
-          
+
           <!-- Center: Dice -->
           <div class="dice-area">
             <div id="dice" class="dice">
               <div class="dice-face">?</div>
             </div>
             <button id="roll-button" class="btn-primary" onclick="rollDice()">
-              Roll Dice
+              サイコロを振る
             </button>
             <div id="dice-result" class="dice-result"></div>
             <div id="selection-prompt" class="selection-prompt" style="display: none;">
-              Select <span id="cards-to-lose">0</span> cards to lose
+              <span id="cards-to-lose">0</span> 枚の失うカードを選んでください
               <br>
               <button id="confirm-selection" class="btn-secondary" onclick="confirmSelection()" disabled>
-                Confirm Selection
+                選択を確定
               </button>
             </div>
             <div id="continue-or-finish" class="continue-or-finish" style="display: none;">
-              <button class="btn-primary" onclick="continueRolling()">Continue Rolling</button>
-                            <button class="btn-secondary" onclick="finishGame()">
-                              Finish Game
-                            </button>
+              <button class="btn-primary" onclick="continueRolling()">振るのを続ける</button>
+              <button class="btn-secondary" onclick="finishGame()">
+                ゲームを終了
+              </button>
             </div>
           </div>
-          
+
           <!-- Right: Lost Cards -->
           <div class="lost-cards">
-            <h3>Lost Cards (<span id="lost-count">0</span>)</h3>
+            <h3>失われたカード (<span id="lost-count">0</span>)</h3>
             <div id="lost-cards-list" class="cards-list">
               <!-- Lost cards appear here -->
             </div>
           </div>
         </div>
-            </div>
-          </div>
-        </section>
-      
-        <section id="interim-story" class="screen story-screen">
-          <div class="content-wrapper story-content">
-                  <div class="story-text">
-                    <p>Before I knew it, the child dressed in an eccentric outfit was standing next to me.</p>
-                    <p>"Hi! You managed to use the 'Dice of Destiny', huh?"<br>
-                    The child spoke again.<br>
-                    "Which card did you lose? Which card did you keep?"</p>
-                  </div>
+      </div>
+    </div>
+  </section>
 
-                  <div class="interim-cards-display">
-                    <div class="interim-cards-section">
-                      <h3>Remaining Cards (<span id="interim-remaining-count">0</span>)</h3>
-                      <div id="interim-remaining-cards" class="interim-cards-grid">
-                        <!-- Remaining cards will be displayed here -->
-                      </div>
-                    </div>
-
-                    <div class="interim-cards-section">
-                      <h3>Lost Cards (<span id="interim-lost-count">0</span>)</h3>
-                      <div id="interim-lost-cards" class="interim-cards-grid">
-                        <!-- Lost cards will be displayed here -->
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="interim-message-section">
-                    <div class="story-text">
-                      <p>As I looked at the cards, the child asked, "What meaning does this experience hold for you?"<br>
-                      -What meaning does it hold? I pondered.<br>
-                      "Oh, that's right! Before you return to the real world, why not write a message to someone important to you (family, partner, friend, etc.) about how you felt and what you thought during this experience?"</p>
-                    </div>
-                    <div class="message-input-wrapper">
-                      <textarea id="interim-message" name="interim-message" rows="10" placeholder="Write your message here..." style="width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px;"></textarea>
-                    </div>
-                  </div>
-
-                  <button class="btn-primary" onclick="saveInterimMessageAndContinue()">
-              Continue
-            </button>
-          </div>
-        </section>
-      
-        <section id="ending-story" class="screen story-screen">
+  <section id="interim-story" class="screen story-screen">
     <div class="content-wrapper story-content">
       <div class="story-text">
-        <p>After rolling all the dice, slowly close your eyes.</p>
-        <p>Then, you hear the Master's voice speaking to you:</p>
-        <blockquote>
-          "Everything you have in life will one day be lost. Everyone, without exception, 
-          will eventually face death."
-        </blockquote>
-        <p>But the voice continues:</p>
-        <blockquote>
-          "Yet right now, in this very moment, you are alive. And the things you cherish most 
-          are still with you."
-        </blockquote>
-        <p>The words begin to fade, and when you open your eyes again, you find yourself back 
-        in the same place as before.</p>
-        <p>You realize you have just experienced something strange—your most important things 
-        being taken away by fate.</p>
-        <p class="story-emphasis">You take a deep breath. Your heart feels calmer. And somehow, 
-        you sense that life might be a little brighter than before.</p>
+        <p>いつの間にか、奇抜な衣装を着た子供があなたの隣に立っていました。</p>
+        <p>「やあ！ 『運命のサイコロ』を使ってみたんだね？」<br>
+          子供は再び話しかけてきました。<br>
+          「どのカードを失って、どのカードを守ったの？」</p>
       </div>
-      <button class="btn-primary" onclick="navigateTo('post-survey')">
-        Proceed to Final Survey
+
+      <div class="interim-cards-display">
+        <div class="interim-cards-section">
+          <h3>残りのカード (<span id="interim-remaining-count">0</span>)</h3>
+          <div id="interim-remaining-cards" class="interim-cards-grid">
+            <!-- Remaining cards will be displayed here -->
+          </div>
+        </div>
+
+        <div class="interim-cards-section">
+          <h3>失われたカード (<span id="interim-lost-count">0</span>)</h3>
+          <div id="interim-lost-cards" class="interim-cards-grid">
+            <!-- Lost cards will be displayed here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="interim-message-section">
+        <div class="story-text">
+          <p>カードを見つめながら、子供は尋ねました。「この体験は、君にとってどんな意味があった？」<br>
+            ――どんな意味があっただろう？ あなたは考え込みます。<br>
+            「そうだ！ 現実の世界に戻る前に、君の大切な人（家族、パートナー、友人など）へ、
+            この体験で感じたことや考えたことをメッセージとして書いてみない？」</p>
+        </div>
+        <div class="message-input-wrapper">
+          <textarea id="interim-message" name="interim-message" rows="10" placeholder="ここにメッセージを書いてください..."
+            style="width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px;"></textarea>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="saveInterimMessageAndContinue()">
+        次へ
       </button>
     </div>
   </section>
 
-  <section id="post-survey" class="screen">
-    <div class="content-wrapper survey-wrapper">
-      <h2>Post-Survey</h2>
-      <p class="survey-intro">
-        Thank you for completing the experience. Please answer the following questions to help us understand your thoughts and feelings after the game.
-      </p>
-      
-      <form id="post-survey-form" class="survey-form">
-        
-        <!-- Progress Indicator -->
-        <div class="survey-progress">
-          <div class="progress-bar">
-            <div class="progress-fill" id="post-survey-progress"></div>
-          </div>
-          <p class="progress-text">
-            <span id="post-answered-count">0</span> of <span class="total-count">53</span> questions answered
-          </p>
-        </div>
-
-
-        
-        <!-- Section 1: Life Satisfaction (Q1-Q8) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§1.</strong> The following statements ask you to evaluate your overall satisfaction with your life. There are no right or wrong answers. Please respond honestly according to how you feel.
-          </p>
-
-          <div class="likert-questions">
-            <!-- Q1 -->
-            <div class="likert-question">
-              <label class="question-label">Q1: I am satisfied with my life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q1" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q1" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q2 -->
-            <div class="likert-question">
-              <label class="question-label">Q2: The conditions of my life are excellent.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q2" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q2" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q3 -->
-            <div class="likert-question">
-              <label class="question-label">Q3: I am doing well in my life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q3" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q3" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q4 -->
-            <div class="likert-question">
-              <label class="question-label">Q4: I have gotten the important things I want in life.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q4" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q4" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q5 -->
-            <div class="likert-question">
-              <label class="question-label">Q5: If I could live my life over, I would change almost nothing.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q5" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q5" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q6 -->
-            <div class="likert-question">
-              <label class="question-label">Q6: My life is full of value.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q6" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q6" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q7 -->
-            <div class="likert-question">
-              <label class="question-label">Q7: My personal existence is significant.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q7" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q7" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-            <!-- Q8 -->
-            <div class="likert-question">
-              <label class="question-label">Q8: Every day, I experience the sense that life is worth living.</label>
-              <div class="likert-scale">
-                <span class="scale-label">Strongly Disagree</span>
-                <div class="scale-options">
-                  <label class="scale-option"><input type="radio" name="q8" value="1" /><span class="scale-number">1</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="2" /><span class="scale-number">2</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="3" /><span class="scale-number">3</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="4" /><span class="scale-number">4</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="5" /><span class="scale-number">5</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="6" /><span class="scale-number">6</span></label>
-                  <label class="scale-option"><input type="radio" name="q8" value="7" /><span class="scale-number">7</span></label>
-                </div>
-                <span class="scale-label">Strongly Agree</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Section 1 -->
-        
-        <!-- Section 2: Self-Efficacy (Q9-Q21) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§2.</strong> For each statement below, please indicate how confident you are that you can perform the behavior when you face challenges or difficult situations.
-          </p>
-
-            <div class="likert-questions">
-                <!-- Q9 -->
-                <div class="likert-question">
-                  <label class="question-label">Q9: Break an upsetting problem down into smaller parts</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q9" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q9" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q10 -->
-                <div class="likert-question">
-                  <label class="question-label">Q10: Persist in solving a problem even when it seems difficult</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q10" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q10" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q11 -->
-                <div class="likert-question">
-                  <label class="question-label">Q11: Make unpleasant thoughts go away</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q11" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q11" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q12 -->
-                <div class="likert-question">
-                  <label class="question-label">Q12: Think positively about your future</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q12" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q12" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q13 -->
-                <div class="likert-question">
-                  <label class="question-label">Q13: Control your negative thoughts</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q13" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q13" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q14 -->
-                <div class="likert-question">
-                  <label class="question-label">Q14: Stop yourself from being upset by unpleasant thoughts</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q14" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q14" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q15 -->
-                <div class="likert-question">
-                  <label class="question-label">Q15: Keep from feeling sad</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q15" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q15" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q16 -->
-                <div class="likert-question">
-                  <label class="question-label">Q16: Make friends</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q16" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q16" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q17 -->
-                <div class="likert-question">
-                  <label class="question-label">Q17: Get emotional support from friends and family</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q17" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q17" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q18 -->
-                <div class="likert-question">
-                  <label class="question-label">Q18: Get friends to help you with the things you need</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q18" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q18" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q19 -->
-                <div class="likert-question">
-                  <label class="question-label">Q19: Get emotional support from community organizations</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q19" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q19" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q20 -->
-                <div class="likert-question">
-                  <label class="question-label">Q20: Ask people in your community for help when you need it</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q20" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q20" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q21 -->
-                <div class="likert-question">
-                  <label class="question-label">Q21: Get emotional support from outside the family</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Cannot do at all</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q21" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q21" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Section 2 -->
-
-        <!-- Section 3: Post-Traumatic Growth (Q22-Q36) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§3.</strong> For each of the following statements, indicate how much change you experienced, if any change at all, as a result of the event that you nominated earlier.<br>
-            <em>Because of this event…</em>
-          </p>
-
-            <div class="likert-questions">
-                <!-- Q22 -->
-                <div class="likert-question">
-                  <label class="question-label">Q22: I experienced a change in how I treat others.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q22" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q22" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q23 -->
-                <div class="likert-question">
-                  <label class="question-label">Q23: I experienced a change in the extent to which I feel free to make my own decisions.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q23" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q23" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q24 -->
-                <div class="likert-question">
-                  <label class="question-label">Q24: I experienced a change in my belief that I have something of value to teach others about life.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q24" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q24" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q25 -->
-                <div class="likert-question">
-                  <label class="question-label">Q25: I experienced a change in the extent to which I can be myself and not try to be what others want me to be.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q25" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q25" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q26 -->
-                <div class="likert-question">
-                  <label class="question-label">Q26: I experienced a change in the extent to which I work through problems and not just give up.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q26" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q26" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q27 -->
-                <div class="likert-question">
-                  <label class="question-label">Q27: I experienced a change in the extent to which I find meaning in life.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q27" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q27" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q28 -->
-                <div class="likert-question">
-                  <label class="question-label">Q28: I experienced a change in the extent to which I reach out and help others.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q28" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q28" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q29 -->
-                <div class="likert-question">
-                  <label class="question-label">Q29: I experienced a change in the extent to which I am a confident person.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q29" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q29" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q30 -->
-                <div class="likert-question">
-                  <label class="question-label">Q30: I experienced a change in the extent to which I listen when others talk to me.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q30" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q30" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Certain can do</span>
-                  </div>
-                </div>
-                <!-- Q31 -->
-                <div class="likert-question">
-                  <label class="question-label">Q31: I experienced a change in the extent to which I am open to new information and ideas.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q31" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q31" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-                <!-- Q32 -->
-                <div class="likert-question">
-                  <label class="question-label">Q32: I experienced a change in the extent to which I communicate honestly with others.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q32" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q32" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-                <!-- Q33 -->
-                <div class="likert-question">
-                  <label class="question-label">Q33: I experienced a change in my desire to have some impact on the world.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q33" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q33" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-                <!-- Q34 -->
-                <div class="likert-question">
-                  <label class="question-label">Q34: I experienced a change in my belief that it's OK to ask others for help.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q34" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q34" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-                <!-- Q35 -->
-                <div class="likert-question">
-                  <label class="question-label">Q35: I experienced a change in the extent to which I stand up for my personal rights.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q35" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q35" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-                <!-- Q36 -->
-                <div class="likert-question">
-                  <label class="question-label">Q36: I experienced a change in my belief about how many people care about me.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">A very negative change</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q36" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q36" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">A very positive change</span>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Section 3 -->
-
-        <!-- Section 4: Learning Engagement (Q37-Q52) -->
-        <div class="survey-section">
-          <p class="section-instruction">
-            <strong>§4.</strong> For each statement below, please indicate how helpful this game-based educational program was in maintaining your motivation and engagement in learning. Your responses reflect your personal experience with the program.
-          </p>
-
-            <div class="likert-questions">
-                <!-- Q37 -->
-                <div class="likert-question">
-                  <label class="question-label">Q37: The learning content captures my interest.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q37" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q37" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q38 -->
-                <div class="likert-question">
-                  <label class="question-label">Q38: The learning material is engaging.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q38" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q38" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q39 -->
-                <div class="likert-question">
-                  <label class="question-label">Q39: I find the content stimulating.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q39" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q39" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q40 -->
-                <div class="likert-question">
-                  <label class="question-label">Q40: The content is presented in an interesting way.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q40" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q40" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q41 -->
-                <div class="likert-question">
-                  <label class="question-label">Q41: The learning material is relevant to my goals.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q41" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q41" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q42 -->
-                <div class="likert-question">
-                  <label class="question-label">Q42: The content is applicable to my personal interests.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q42" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q42" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q43 -->
-                <div class="likert-question">
-                  <label class="question-label">Q43: I can relate the material to my experiences.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q43" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q43" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q44 -->
-                <div class="likert-question">
-                  <label class="question-label">Q44: The content is useful for my future.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q44" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q44" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q45 -->
-                <div class="likert-question">
-                  <label class="question-label">Q45: I believe I can succeed in this learning.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q45" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q45" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q46 -->
-                <div class="likert-question">
-                  <label class="question-label">Q46: The material is at an appropriate level for me.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q46" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q46" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q47 -->
-                <div class="likert-question">
-                  <label class="question-label">Q47: I feel confident in my ability to learn this content.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q47" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q47" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q48 -->
-                <div class="likert-question">
-                  <label class="question-label">Q48: I can achieve success with effort.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q48" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q48" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q49 -->
-                <div class="likert-question">
-                  <label class="question-label">Q49: I feel satisfied with my learning progress.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q49" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q49" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q50 -->
-                <div class="likert-question">
-                  <label class="question-label">Q50: The learning experience meets my expectations.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q50" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q50" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q51 -->
-                <div class="likert-question">
-                  <label class="question-label">Q51: I am pleased with the outcomes of my learning.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q51" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q51" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-                <!-- Q52 -->
-                <div class="likert-question">
-                  <label class="question-label">Q52: I feel a sense of accomplishment.</label>
-                  <div class="likert-scale">
-                    <span class="scale-label">Strongly Disagree</span>
-                    <div class="scale-options">
-                      <label class="scale-option"><input type="radio" name="q52" value="1" /><span class="scale-number">1</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="2" /><span class="scale-number">2</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="3" /><span class="scale-number">3</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="4" /><span class="scale-number">4</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="5" /><span class="scale-number">5</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="6" /><span class="scale-number">6</span></label>
-                      <label class="scale-option"><input type="radio" name="q52" value="7" /><span class="scale-number">7</span></label>
-                    </div>
-                    <span class="scale-label">Strongly Agree</span>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Section 4 -->
-
-        <!-- Section 5: Open-ended Feedback -->
-        <div class="survey-section">
-
-          <!-- Q53: Open-ended feedback -->
-          <div class="question-group">
-            <label for="q53" class="question-label">
-              Q53: Please share your thoughts and impressions after experiencing the game "The Dice of Destiny."
-            </label>
-            <textarea
-              id="q53"
-              name="q53"
-              class="text-input"
-              rows="6"
-              placeholder="Share your thoughts, feelings, and reflections about the game experience..."
-            ></textarea>
-          </div>
-        </div>
-        <!-- End Section 5 -->
-
-        <!-- Submit Button -->
-        <div class="form-actions">
-          <button type="submit" class="btn-primary" id="post-survey-submit">
-            Complete Survey
-          </button>
-        </div>
-        
-      </form>
+  <section id="ending-story" class="screen story-screen">
+    <div class="content-wrapper story-content">
+      <div class="story-text">
+        <p>すべてのサイコロを振り終え、あなたはゆっくりと目を閉じます。</p>
+        <p>すると、マスターの声が聞こえてきます。</p>
+        <blockquote>
+          「人生で手にするすべてのものは、いつか失われる日が来る。
+          誰しも、例外なく、死を迎える時が来るのだ。」
+        </blockquote>
+        <p>しかし、声は続きます。</p>
+        <blockquote>
+          「だが、今この瞬間、お前は生きている。
+          そして、お前が最も大切に思うものは、まだお前と共にある。」
+        </blockquote>
+        <p>言葉が薄れていき、再び目を開けると、あなたは以前と同じ場所にいました。</p>
+        <p>あなたは不思議な体験をしたことに気づきます――運命によって最も大切なものを
+          奪われるという体験を。</p>
+        <p class="story-emphasis">あなたは深く息を吸い込みます。心は穏やかです。
+          そしてなぜか、人生が以前よりも少し明るく感じられるのです。</p>
+      </div>
+      <button class="btn-primary" onclick="completeGameAndSend()">
+        体験を完了する
+      </button>
     </div>
   </section>
+
 
   <section id="completion" class="screen">
     <div class="content-wrapper completion-content">
       <h1 class="completion-title">The Dice of Destiny</h1>
-      <p class="completion-subtitle">A game where you learn the value of life through loss</p>
-      
+      <p class="completion-subtitle">喪失を通じて生の価値を学ぶゲーム</p>
+
       <div class="completion-message">
-        <p>I hope today's session will support your health and well-being,<br>
-        and help you lead a more fulfilling life.</p>
-        <p>I look forward to seeing you again someday, in good spirits.<br>
-        <strong>Thank you so much.</strong></p>
+        <p>今日のセッションが、あなたの健康と幸福の支えとなり、<br>
+          より充実した人生を送る一助となることを願っています。</p>
+        <p>いつかまた、元気な姿でお会いできることを楽しみにしています。<br>
+          <strong>本当にありがとうございました。</strong>
+        </p>
       </div>
-      
+
       <p class="copyright">©Hironori SAKAI 2025</p>
     </div>
   </section>
@@ -2489,4 +536,5 @@
   <script src="js/app.js"></script>
   <script src="js/survey.js"></script>
 </body>
+
 </html>

@@ -289,7 +289,6 @@ async function sendGameData() {
   // Prepare data object
   const gameData = {
     timestamp: new Date().toISOString(),
-    student_id: surveyData.studentInfo?.id || '',
     student_name: surveyData.studentInfo?.name || '',
 
     // Stage 1 Data

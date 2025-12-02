@@ -32,21 +32,18 @@ function initializeApp() {
 }
 
 function startNewGame() {
-  const studentIdInput = document.getElementById('student-id');
   const studentNameInput = document.getElementById('student-name');
 
-  if (!studentIdInput || !studentNameInput) return;
+  if (!studentNameInput) return;
 
-  const studentId = studentIdInput.value.trim();
   const studentName = studentNameInput.value.trim();
 
-  if (!studentId || !studentName) {
-    alert('Please enter both Student ID and Name.');
+  if (!studentName) {
+    alert('ID（呼ばれたい名）を入力してください。');
     return;
   }
 
   // Store student info
-  studentInfo.id = studentId;
   studentInfo.name = studentName;
 
   // Initialize survey data structure if not exists

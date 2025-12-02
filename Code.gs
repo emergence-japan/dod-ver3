@@ -17,7 +17,6 @@ function doPost(e) {
     if (sheet.getLastRow() === 0) {
       const headers = [
         "Timestamp",
-        "Student ID",
         "Student Name",
         "Stage1 Cards",
         "Stage2 Stories",
@@ -33,7 +32,6 @@ function doPost(e) {
     // データを行データに変換
     const rowData = [
       requestData.timestamp,
-      requestData.student_id,
       requestData.student_name,
       requestData.stage1_cards,
       requestData.stage2_stories,

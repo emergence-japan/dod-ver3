@@ -20,21 +20,15 @@
   <section id="welcome" class="screen active">
     <div class="content-wrapper">
       <h1 class="title">The Dice of Destiny</h1>
-      <span class="subtitle">喪失を通じて生の価値を学ぶゲーム</span>
 
       <div class="student-info-form">
         <div class="form-group">
-          <label for="student-id" style="display: block; margin-bottom: 0.5rem; color: var(--text-color);">学籍番号</label>
-          <input type="text" id="student-id" class="text-input" placeholder="学籍番号を入力してください" required
-            style="margin-bottom: 1rem; width: 100%; max-width: 300px;">
-        </div>
-        <div class="form-group">
-          <label for="student-name" style="display: block; margin-bottom: 0.5rem; color: var(--text-color);">氏名</label>
-          <input type="text" id="student-name" class="text-input" placeholder="氏名を入力してください" required
+          <label for="student-name" style="display: block; margin-bottom: 0.5rem; color: var(--text-color);">ID（呼ばれたい名を入力してください）</label>
+          <input type="text" id="student-name" class="text-input" placeholder="呼ばれたい名を入力してください" required
             style="margin-bottom: 1.5rem; width: 100%; max-width: 300px;">
         </div>
         <button class="btn-primary" onclick="startNewGame()">
-          ゲームを始める
+          スタート
         </button>
       </div>
     </div>
@@ -42,15 +36,15 @@
 
   <section id="important-notes" class="screen">
     <div class="content-wrapper">
-      <h2>重要な注意事項</h2>
+      <h2>注意事項</h2>
 
       <div class="notes-box">
         <h3>この体験について</h3>
         <ul>
           <li>これはゲームです。プレイ中の体験は現実とは異なります。</li>
-          <li>このゲームへの参加および中止は、完全にあなたの自由意志によります。</li>
+          <li>このゲームへの参加および中止は、完全にあなたの自由です。</li>
           <li>ゲームへの参加やその結果が、個人の評価に影響することはありません。</li>
-          <li>プレイ中に不快感を感じた場合は、すぐにゲームを中止することができます。</li>
+          <li>プレイ中に気分を害した場合は、すぐにゲームを中止することができます。</li>
           <li>誰もあなたにゲームへの参加や継続を強制することはできません。</li>
         </ul>
       </div>
@@ -59,11 +53,11 @@
 
       <div class="time-estimate">
         <p><strong>所要時間:</strong> 約30分</p>
-        <p><em>時間に余裕を持って体験を完了できるようにしてください。</em></p>
+        <p><em>時間に余裕を持って体験してください。</em></p>
       </div>
 
       <button class="btn-primary" onclick="navigateTo('opening-story-1')">
-        理解して体験を始める
+        理解して体験を開始する
       </button>
     </div>
   </section>
@@ -72,7 +66,7 @@
     <div class="content-wrapper story-content">
       <div class="story-text">
         <p>突然、あなたの周りのすべてが暗闇に包まれます。</p>
-        <p>再び目を開けると、あなたは奇妙で見知らぬ世界にいました。</p>
+        <p>目を開けると、あなたは奇妙で見知らぬ世界にいました。</p>
         <p>目の前には、奇抜でカラフルな衣装を着た子供が立っています。</p>
         <p>目が合うと、その子供はあなたに語りかけてきました。</p>
         <blockquote>
@@ -92,14 +86,14 @@
     <div class="content-wrapper story-content">
       <div class="story-text">
         <p>「『一体何を言っているんだ？』と思っているだろうね。それは当然だ。
-          でも、お願いだ、僕を信じて。君がこれから体験することは、君の現実の人生と深くつながっているんだ。」</p>
+          でも、お願いだ、僕を信じて。君がこれから体験することは、君の人生と深くつながっているんだ。」</p>
         <p>あなたがその言葉を処理する間もなく、さらなる驚きが訪れます。</p>
         <p>「この不幸に直面したのは君だけじゃない。他の人たちもそうだ。そして、
           君たちはチャンスを与えられたんだ――<strong>『運命のサイコロ』</strong>と呼ばれるものを使うチャンスをね。」</p>
         <p>子供は身を乗り出し、その重要性を強調するかのように声を潜めました。</p>
         <blockquote>
-          「これは一番大事なことだから、忘れないで。このサイコロを振ることで、
-          君は最も大切なものを守れるかもしれない。それどころか、
+          「これは一番大事なことだから、忘れないで。このサイコロを使うことで、
+          君は最も大切なものに気がつくかもしれない。それだけじゃない、
           今よりももっと良い人生へと導かれるかもしれないんだ。」
         </blockquote>
       </div>
@@ -115,20 +109,19 @@
         <p>あなたがもっと明確な説明を求めようとしたその時……</p>
         <p>「詳しく説明してほしいのはわかるよ」と子供は遮ります。
           「でも時間がないんだ。もう始まるよ。」</p>
-        <p>あなたは不安を感じつつも、その表情は決意へと変わっていきます。</p>
-        <p>「聞いてくれてありがとう」と子供は続けます。「さあ、君にとって最も大切なものを
-          カードに書き出すんだ。できるだけたくさんね。そして、同じように大切なものを書いた
-          他の人たちと一緒に、運命のサイコロを振るんだ。」</p>
-        <p>子供は突然、警告するかのように指を立てました。</p>
+        <p>あなたは不安を感じつつも、この子供が真面目に話していることを理解します。</p>
+        <p>「聞いてくれてありがとう」と子供は続けます。
+          「さあ、君にとって最も大切なものを カードに書き出すんだよ。できるだけたくさんね。そして、他の人たちと同じように、運命のサイコロを振るんだ。」</p>
+        <p>子供は突然、警告するようにかのようにあなたに顔を近づけて言いました。</p>
         <blockquote>
-          「あ！ 覚えておいて――マスターの指示には必ず従うこと。勝手な行動はしちゃいけないよ。
+          「覚えておいて――マスターの指示には必ず従うこと。勝手な行動はしちゃいけないよ。
           君の人生がこれによって良くなることを、心から願っているよ。」
         </blockquote>
-        <p class="story-emphasis">その最後の言葉と共に、子供はあなたの視界から消えていきました――
-          現れたときと同じくらい素早く。</p>
+        <p class="story-emphasis">その言葉を最後に、子供はあなたの視界から消えていきました――
+          現れたときと同じようにく。</p>
       </div>
       <button class="btn-primary" onclick="navigateTo('stage1')">
-        ステージ1を開始
+        ステージ1へ進む
       </button>
     </div>
   </section>
@@ -138,12 +131,15 @@
 
       <!-- Stage Header -->
       <div class="stage-header">
-        <h2>ステージ1: 大切なものカードの作成</h2>
+        <h2>Stage1<br>Creating Precious Thing Cards<br>【大切なものカード】</h2>
         <p class="stage-mission">
           <strong>ミッション:</strong> あなたにとって大切なものを挙げてください。
         </p>
         <p class="stage-goal">
-          <strong>ゴール:</strong> 本当に大切なものを5つ以上書き出し、ボードにカードを配置してください。
+          <strong>ゴール:</strong> 本当に大切なものが書かれたカードを５枚以上作成してください。
+        </p>
+        <p class="stage-goal">
+          各テーマの下に配置された空欄に入力するとカードが完成します。
         </p>
         <p class="stage-time">
           <strong>所要時間:</strong> 5-10分
@@ -327,23 +323,22 @@
   <section id="stage2" class="screen">
     <div class="content-wrapper stage-wrapper">
       <div class="stage-header">
-        <h2>ステージ2: 物語を書く</h2>
+        <h2>Stage 2<br>Writing Stories<br>【秘められた物語】</h2>
         <p class="stage-mission">
-          <strong>ミッション:</strong> カードの背景にある物語を共有してください。
+          <strong>ミッション:</strong> カードの背景にあるストーリーを書いてください。
         </p>
         <p class="stage-goal">
-          <strong>ゴール:</strong> 物語を書き上げる。
+          <strong>ゴール:</strong> 秘められたストーリーを書き上げる。
         </p>
       </div>
 
       <div class="instruction-box">
         <p>
-          少なくとも1枚のカードを選び、なぜそれが大切なのか物語を書いてください。
+          少なくとも１枚のカードを選択し、なぜそれが大切なのかを伝えるストーリーを書いてください。
           誰かに話して聞かせるように書いてみましょう。
         </p>
         <p class="example-text">
-          <strong>例:</strong> 「この場所は家族のリビングルームです。いつもみんなで集まって、
-          たくさんの思い出があります。だから……」
+          <strong>例:</strong> 「場所　リビングルーム　　この場所は私が家族と過ごしたリビングルームです。いつもみんなで集まって、たくさんの思い出があります。私の母が……」
         </p>
       </div>
 
@@ -375,20 +370,20 @@
 
       <!-- Difficulty Selection (shown first) -->
       <div id="difficulty-selection" class="difficulty-selection">
-        <h2>ステージ3: 運命のサイコロを振る</h2>
-        <p>始める前に、難易度を選択してください</p>
+        <h2>Select Your Challenge!<br>【難易度選択】</h2>
+        <p>サイコロを振る前に、難易度を選択してください</p>
 
         <div class="difficulty-options">
           <div class="difficulty-card" onclick="selectDifficulty('EASY')">
-            <h3>イージーモード</h3>
-            <p>1回につき1〜6枚のカードを失います</p>
-            <button class="btn-secondary">イージーを選択</button>
+            <h3>スタンダードモード</h3>
+            <p>1回振るごとに1〜6枚のカードを失います</p>
+            <button class="btn-secondary">スタンダードモードを選択</button>
           </div>
 
           <div class="difficulty-card" onclick="selectDifficulty('HARD')">
             <h3>ハードモード</h3>
-            <p>1回につき3〜8枚のカードを失います</p>
-            <button class="btn-secondary">ハードを選択</button>
+            <p>1回振るごとに3〜8枚のカードを失います</p>
+            <button class="btn-secondary">ハードモードを選択</button>
           </div>
         </div>
       </div>
@@ -396,8 +391,8 @@
       <!-- Game Interface (hidden initially) -->
       <div id="game-interface" class="game-interface" style="display: none;">
         <div class="game-header">
-          <h2>ステージ3: 運命のサイコロを振る (<span id="difficulty-display"></span> モード)</h2>
-          <p>ロール #<span id="roll-number">1</span> (最低4回)</p>
+          <h2>Stage 3<br>Roll the Dice of Destiny (<span id="difficulty-display"></span> モード)<br>【運命のサイコロ】</h2>
+          <p>ロール #<span id="roll-number">1</span> (最低4回振る)</p>
         </div>
 
         <div class="game-layout">
@@ -451,7 +446,7 @@
         <p>いつの間にか、奇抜な衣装を着た子供があなたの隣に立っていました。</p>
         <p>「やあ！ 『運命のサイコロ』を使ってみたんだね？」<br>
           子供は再び話しかけてきました。<br>
-          「どのカードを失って、どのカードを守ったの？」</p>
+          「どのカードが残って、どのカードを失ったの？」</p>
       </div>
 
       <div class="interim-cards-display">
@@ -472,13 +467,13 @@
 
       <div class="interim-message-section">
         <div class="story-text">
-          <p>カードを見つめながら、子供は尋ねました。「この体験は、君にとってどんな意味があった？」<br>
+          <p>失われたカードを見つめながら、子供は尋ねました。「この体験は、君にとってどんな意味があった？」<br>
             ――どんな意味があっただろう？ あなたは考え込みます。<br>
             「そうだ！ 現実の世界に戻る前に、君の大切な人（家族、パートナー、友人など）へ、
-            この体験で感じたことや考えたことをメッセージとして書いてみない？」</p>
+            この体験を通じて感じたことや考えたことをメッセージにしてみない？」</p>
         </div>
         <div class="message-input-wrapper">
-          <textarea id="interim-message" name="interim-message" rows="10" placeholder="ここにメッセージを書いてください..."
+          <textarea id="interim-message" name="interim-message" rows="10" placeholder="大切な人を想い，ここにメッセージを書いてください．．"
             style="width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px;"></textarea>
         </div>
       </div>
@@ -492,22 +487,21 @@
   <section id="ending-story" class="screen story-screen">
     <div class="content-wrapper story-content">
       <div class="story-text">
-        <p>すべてのサイコロを振り終え、あなたはゆっくりと目を閉じます。</p>
+        <p>すべてのダイスを振り終え、あなたはゆっくりと目を閉じます。</p>
         <p>すると、マスターの声が聞こえてきます。</p>
         <blockquote>
           「人生で手にするすべてのものは、いつか失われる日が来る。
           誰しも、例外なく、死を迎える時が来るのだ。」
         </blockquote>
-        <p>しかし、声は続きます。</p>
+        <p>さらに、声は続きます。</p>
         <blockquote>
           「だが、今この瞬間、お前は生きている。
-          そして、お前が最も大切に思うものは、まだお前と共にある。」
+          そして、お前が大切に思うものは、お前と共にあるのだ。」
         </blockquote>
-        <p>言葉が薄れていき、再び目を開けると、あなたは以前と同じ場所にいました。</p>
-        <p>あなたは不思議な体験をしたことに気づきます――運命によって最も大切なものを
-          奪われるという体験を。</p>
+        <p>マスターの声が聞こえなくなり、再び目を開けると、あなたは以前と同じ場所にいました。</p>
+        <p>あなたは不思議な体験をしたことに気づきます――運命によって最も大切なものが失われるという体験を。</p>
         <p class="story-emphasis">あなたは深く息を吸い込みます。心は穏やかです。
-          そしてなぜか、人生が以前よりも少し明るく感じられるのです。</p>
+          そして、人生が以前よりも少し明るく感じられるのです。</p>
       </div>
       <button class="btn-primary" onclick="completeGameAndSend()">
         体験を完了する
@@ -519,12 +513,11 @@
   <section id="completion" class="screen">
     <div class="content-wrapper completion-content">
       <h1 class="completion-title">The Dice of Destiny</h1>
-      <p class="completion-subtitle">喪失を通じて生の価値を学ぶゲーム</p>
 
       <div class="completion-message">
-        <p>今日のセッションが、あなたの健康と幸福の支えとなり、<br>
+        <p>この体験が、あなたの健康と幸福の支えとなり、<br>
           より充実した人生を送る一助となることを願っています。</p>
-        <p>いつかまた、元気な姿でお会いできることを楽しみにしています。<br>
+        <p>いつかまた、ご一緒できることを楽しみにしています。<br>
           <strong>本当にありがとうございました。</strong>
         </p>
       </div>

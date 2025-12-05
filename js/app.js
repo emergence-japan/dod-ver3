@@ -435,7 +435,12 @@ function selectDifficulty(mode) {
 
   // Show game interface
   document.getElementById('game-interface').style.display = 'block';
-  document.getElementById('difficulty-display').textContent = mode;
+
+  const displayModeMap = {
+    'STANDARD': 'スタンダード',
+    'HARD': 'ハード'
+  };
+  document.getElementById('difficulty-display').textContent = displayModeMap[mode] || mode;
 
   // Initialize cards
   initializeStage3Cards();

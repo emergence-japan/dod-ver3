@@ -515,7 +515,7 @@ function rollDice() {
 
 function processRollResult(diceResult) {
   const mode = stage3Data.mode;
-  const cardsToLose = mode === 'EASY' ? diceResult : diceResult + 2;
+  const cardsToLose = mode === 'STANDARD' ? diceResult : diceResult + 2;
   const remainingCount = stage3Data.remainingCards.length;
 
   const actualCardsToLose = Math.min(cardsToLose, remainingCount);

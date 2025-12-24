@@ -1,11 +1,21 @@
-// app.js
+// app.js - 修正版
 
 // Global state
 let currentSection = 'welcome';
-let studentInfo = {
-  id: '',
-  name: ''
-};
+
+// グローバルなsurveyDataを一元管理（重要: survey.jsとの重複を避ける）
+if (typeof window.surveyData === 'undefined') {
+  window.surveyData = {
+    preSurvey: {},
+    gamePlay: {
+      stage1: null,
+      stage2: null,
+      stage3: null,
+      interimMessage: ''
+    },
+    postSurvey: {}
+  };
+}
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,31 +39,6 @@ function initializeApp() {
       e.returnValue = 'Are you sure you want to leave? Your progress will be lost.';
     }
   });
-}
-
-function startNewGame() {
-  const studentNameInput = document.getElementById('student-name');
-
-  if (!studentNameInput) return;
-
-  const studentName = studentNameInput.value.trim();
-
-  if (!studentName) {
-    alert('ID（呼ばれたい名）を入力してください。');
-    return;
-  }
-
-  // Store student info
-  studentInfo.name = studentName;
-
-  // Initialize survey data structure if not exists
-  if (typeof surveyData === 'undefined') {
-    surveyData = {};
-  }
-  surveyData.studentInfo = studentInfo;
-
-  // Proceed to important notes
-  navigateTo('important-notes');
 }
 
 function navigateTo(sectionId) {
@@ -107,26 +92,51 @@ async function completeGameAndSend() {
     button.textContent = 'Sending Data...';
 
     try {
-      // Send data
-      await sendGameData();
+      // payloadにはゲームの全データを含める
+      const gamePayload = window.surveyData.gamePlay;
 
-      // Navigate to completion screen
-      navigateTo('completion');
+      // 重要: データが存在するか確認
+      if (!gamePayload.stage1 || !gamePayload.stage2 || !gamePayload.stage3) {
+        throw new Error('ゲームデータが不完全です。');
+      }
+
+      // Send data using the new common submission function
+      const success = await submitToGAS({ page: 'game', payload: gamePayload });
+
+      if (success) {
+        // Navigate to completion screen
+        navigateTo('completion');
+      } else {
+        throw new Error('Submission to GAS failed.');
+      }
+
     } catch (error) {
       console.error('Failed to send data:', error);
-      alert('Failed to send data. Please try again.');
+      alert(`データの送信に失敗しました。
+エラー: ${error.message}
+もう一度お試しください。`);
       button.disabled = false;
       button.textContent = originalText;
     }
   }
 }
 
-// stage1.js
+// ========================================
+// STAGE 1: Creating Precious Thing Cards
+// ========================================
+
+const categoryMap = {
+  items: "モノ",
+  person: "人",
+  places: "場所",
+  events: "出来事",
+  goals: "目標"
+};
 
 let stage1Data = {
   startTime: null,
   endTime: null,
-  cards: [] // Array of {id, category, position, text}
+  cards: []
 };
 
 // Initialize Stage 1
@@ -222,8 +232,10 @@ function validateStage1() {
 // Update validation status element
 function updateValidationStatus(elementId, isValid, text) {
   const element = document.getElementById(elementId);
-  element.textContent = text;
-  element.className = 'validation-status ' + (isValid ? 'valid' : 'invalid');
+  if (element) {
+    element.textContent = text;
+    element.className = 'validation-status ' + (isValid ? 'valid' : 'invalid');
+  }
 }
 
 // Complete Stage 1 and move to Stage 2
@@ -254,13 +266,13 @@ function completeStage1() {
   stage1Data.endTime = new Date().toISOString();
 
   // Store in global surveyData
-  surveyData.gamePlay.stage1 = stage1Data;
+  window.surveyData.gamePlay.stage1 = stage1Data;
 
   // Navigate to Stage 2
   navigateTo('stage2');
 
   // Initialize Stage 2 with cards from Stage 1
-  initializeStage2();
+  setTimeout(() => initializeStage2(), 500);
 }
 
 // Initialize on section display
@@ -280,30 +292,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// stage2.js
-
-const categoryMap = {
-  items: "モノ",
-  person: "人",
-  places: "場所",
-  events: "出来事",
-  goals: "目標"
-};
+// ========================================
+// STAGE 2: Writing Stories
+// ========================================
 
 let stage2Data = {
   startTime: null,
   endTime: null,
-  selectedCards: [], // Array of {cardId, cardText, category, story}
+  selectedCards: []
 };
 
 function initializeStage2() {
   stage2Data.startTime = new Date().toISOString();
 
   // Get cards from Stage 1
-  const cards = surveyData.gamePlay.stage1.cards.filter(card => card.text !== '');
+  if (!window.surveyData.gamePlay.stage1) {
+    console.error('Stage 1 data not found!');
+    return;
+  }
+
+  const cards = window.surveyData.gamePlay.stage1.cards.filter(card => card.text !== '');
 
   // Display cards for selection
   const cardListEl = document.getElementById('stage2-cards');
+  if (!cardListEl) return;
+  
   cardListEl.innerHTML = '';
 
   cards.forEach(card => {
@@ -325,10 +338,8 @@ function toggleCardSelection(cardEl, card) {
   cardEl.classList.toggle('selected');
 
   if (cardEl.classList.contains('selected')) {
-    // Add story input
     addStoryInput(card);
   } else {
-    // Remove story input
     removeStoryInput(card.id);
   }
 
@@ -337,6 +348,7 @@ function toggleCardSelection(cardEl, card) {
 
 function addStoryInput(card) {
   const storyArea = document.getElementById('story-input-area');
+  if (!storyArea) return;
 
   const storyBox = document.createElement('div');
   storyBox.className = 'story-box';
@@ -375,10 +387,16 @@ function validateStage2() {
     }
   });
 
-  document.getElementById('story-count').textContent = storiesWritten;
+  const countEl = document.getElementById('story-count');
+  if (countEl) {
+    countEl.textContent = storiesWritten;
+  }
 
   const valid = storiesWritten >= 1;
-  document.getElementById('stage2-next').disabled = !valid;
+  const nextBtn = document.getElementById('stage2-next');
+  if (nextBtn) {
+    nextBtn.disabled = !valid;
+  }
 
   return valid;
 }
@@ -397,31 +415,35 @@ function completeStage2() {
     const story = textarea.value.trim();
     if (story !== '') {
       const cardId = textarea.dataset.cardId;
-      const card = surveyData.gamePlay.stage1.cards.find(c => c.id === cardId);
+      const card = window.surveyData.gamePlay.stage1.cards.find(c => c.id === cardId);
 
-      stage2Data.selectedCards.push({
-        cardId: cardId,
-        cardText: card.text,
-        category: card.category,
-        story: story
-      });
+      if (card) {
+        stage2Data.selectedCards.push({
+          cardId: cardId,
+          cardText: card.text,
+          category: card.category,
+          story: story
+        });
+      }
     }
   });
 
   stage2Data.endTime = new Date().toISOString();
-  surveyData.gamePlay.stage2 = stage2Data;
+  window.surveyData.gamePlay.stage2 = stage2Data;
 
   // Navigate to Stage 3
   navigateTo('stage3');
 }
 
-// stage3.js
+// ========================================
+// STAGE 3: Roll the Dice of Destiny
+// ========================================
 
 let stage3Data = {
   startTime: null,
   endTime: null,
-  mode: null, // 'EASY' or 'HARD'
-  rolls: [], // Array of {rollNumber, diceResult, cardsLost}
+  mode: null,
+  rolls: [],
   remainingCards: [],
   lostCards: []
 };
@@ -431,16 +453,26 @@ function selectDifficulty(mode) {
   stage3Data.startTime = new Date().toISOString();
 
   // Hide difficulty selection
-  document.getElementById('difficulty-selection').style.display = 'none';
+  const difficultySelection = document.getElementById('difficulty-selection');
+  if (difficultySelection) {
+    difficultySelection.style.display = 'none';
+  }
 
   // Show game interface
-  document.getElementById('game-interface').style.display = 'block';
+  const gameInterface = document.getElementById('game-interface');
+  if (gameInterface) {
+    gameInterface.style.display = 'block';
+  }
 
   const displayModeMap = {
     'STANDARD': 'スタンダード',
     'HARD': 'ハード'
   };
-  document.getElementById('difficulty-display').textContent = displayModeMap[mode] || mode;
+  
+  const modeDisplay = document.getElementById('difficulty-display');
+  if (modeDisplay) {
+    modeDisplay.textContent = displayModeMap[mode] || mode;
+  }
 
   // Initialize cards
   initializeStage3Cards();
@@ -448,7 +480,12 @@ function selectDifficulty(mode) {
 
 function initializeStage3Cards() {
   // Get all filled cards from Stage 1
-  const allCards = surveyData.gamePlay.stage1.cards.filter(c => c.text !== '');
+  if (!window.surveyData.gamePlay.stage1) {
+    console.error('Stage 1 data not found!');
+    return;
+  }
+
+  const allCards = window.surveyData.gamePlay.stage1.cards.filter(c => c.text !== '');
   stage3Data.remainingCards = [...allCards];
   stage3Data.lostCards = [];
 
@@ -458,25 +495,35 @@ function initializeStage3Cards() {
 function displayCards() {
   // Display remaining cards
   const remainingList = document.getElementById('remaining-cards-list');
-  remainingList.innerHTML = '';
+  if (remainingList) {
+    remainingList.innerHTML = '';
 
-  stage3Data.remainingCards.forEach(card => {
-    const cardEl = createGameCard(card, 'remaining');
-    remainingList.appendChild(cardEl);
-  });
+    stage3Data.remainingCards.forEach(card => {
+      const cardEl = createGameCard(card, 'remaining');
+      remainingList.appendChild(cardEl);
+    });
+  }
 
-  document.getElementById('remaining-count').textContent = stage3Data.remainingCards.length;
+  const remainingCount = document.getElementById('remaining-count');
+  if (remainingCount) {
+    remainingCount.textContent = stage3Data.remainingCards.length;
+  }
 
   // Display lost cards
   const lostList = document.getElementById('lost-cards-list');
-  lostList.innerHTML = '';
+  if (lostList) {
+    lostList.innerHTML = '';
 
-  stage3Data.lostCards.forEach(card => {
-    const cardEl = createGameCard(card, 'lost');
-    lostList.appendChild(cardEl);
-  });
+    stage3Data.lostCards.forEach(card => {
+      const cardEl = createGameCard(card, 'lost');
+      lostList.appendChild(cardEl);
+    });
+  }
 
-  document.getElementById('lost-count').textContent = stage3Data.lostCards.length;
+  const lostCount = document.getElementById('lost-count');
+  if (lostCount) {
+    lostCount.textContent = stage3Data.lostCards.length;
+  }
 }
 
 function createGameCard(card, type) {
@@ -497,20 +544,28 @@ function createGameCard(card, type) {
 
 function rollDice() {
   // Disable roll button
-  document.getElementById('roll-button').disabled = true;
+  const rollBtn = document.getElementById('roll-button');
+  if (rollBtn) {
+    rollBtn.disabled = true;
+  }
 
   // Animate dice
   const dice = document.getElementById('dice');
-  dice.classList.add('rolling');
+  if (dice) {
+    dice.classList.add('rolling');
 
-  // Random result after animation
-  setTimeout(() => {
-    const result = Math.floor(Math.random() * 6) + 1;
-    dice.querySelector('.dice-face').textContent = result;
-    dice.classList.remove('rolling');
+    // Random result after animation
+    setTimeout(() => {
+      const result = Math.floor(Math.random() * 6) + 1;
+      const diceFace = dice.querySelector('.dice-face');
+      if (diceFace) {
+        diceFace.textContent = result;
+      }
+      dice.classList.remove('rolling');
 
-    processRollResult(result);
-  }, 1000);
+      processRollResult(result);
+    }, 1000);
+  }
 }
 
 function processRollResult(diceResult) {
@@ -521,12 +576,21 @@ function processRollResult(diceResult) {
   const actualCardsToLose = Math.min(cardsToLose, remainingCount);
 
   // Show result
-  document.getElementById('dice-result').textContent =
-    `You rolled ${diceResult}. You must lose ${actualCardsToLose} card(s).`;
+  const diceResultEl = document.getElementById('dice-result');
+  if (diceResultEl) {
+    diceResultEl.textContent = `You rolled ${diceResult}. You must lose ${actualCardsToLose} card(s).`;
+  }
 
   // Show selection prompt
-  document.getElementById('cards-to-lose').textContent = actualCardsToLose;
-  document.getElementById('selection-prompt').style.display = 'block';
+  const cardsToLoseEl = document.getElementById('cards-to-lose');
+  if (cardsToLoseEl) {
+    cardsToLoseEl.textContent = actualCardsToLose;
+  }
+
+  const selectionPrompt = document.getElementById('selection-prompt');
+  if (selectionPrompt) {
+    selectionPrompt.style.display = 'block';
+  }
 
   // Store for confirmation
   stage3Data.currentRoll = {
@@ -543,9 +607,12 @@ function toggleCardForLoss(cardEl) {
 
 function validateSelection() {
   const selected = document.querySelectorAll('.game-card.selected');
-  const required = stage3Data.currentRoll.cardsToLose;
+  const required = stage3Data.currentRoll ? stage3Data.currentRoll.cardsToLose : 0;
 
-  document.getElementById('confirm-selection').disabled = selected.length !== required;
+  const confirmBtn = document.getElementById('confirm-selection');
+  if (confirmBtn) {
+    confirmBtn.disabled = selected.length !== required;
+  }
 }
 
 function confirmSelection() {
@@ -562,14 +629,19 @@ function confirmSelection() {
   });
 
   // Store roll data
-  stage3Data.currentRoll.cardsLost = lostCardIds;
-  stage3Data.rolls.push(stage3Data.currentRoll);
+  if (stage3Data.currentRoll) {
+    stage3Data.currentRoll.cardsLost = lostCardIds;
+    stage3Data.rolls.push(stage3Data.currentRoll);
+  }
 
   // Update display
   displayCards();
 
   // Hide selection prompt
-  document.getElementById('selection-prompt').style.display = 'none';
+  const selectionPrompt = document.getElementById('selection-prompt');
+  if (selectionPrompt) {
+    selectionPrompt.style.display = 'none';
+  }
 
   // Check if game should continue
   const rollCount = stage3Data.rolls.length;
@@ -579,23 +651,44 @@ function confirmSelection() {
     finishGame();
   } else if (rollCount >= 4) {
     // Show continue or finish options
-    document.getElementById('continue-or-finish').style.display = 'block';
+    const continueOrFinish = document.getElementById('continue-or-finish');
+    if (continueOrFinish) {
+      continueOrFinish.style.display = 'block';
+    }
   } else {
     // Continue rolling (required 4 rolls minimum)
-    document.getElementById('roll-button').disabled = false;
-    document.getElementById('roll-number').textContent = rollCount + 1;
+    const rollBtn = document.getElementById('roll-button');
+    if (rollBtn) {
+      rollBtn.disabled = false;
+    }
+    
+    const rollNumber = document.getElementById('roll-number');
+    if (rollNumber) {
+      rollNumber.textContent = rollCount + 1;
+    }
   }
 }
 
 function continueRolling() {
-  document.getElementById('continue-or-finish').style.display = 'none';
-  document.getElementById('roll-button').disabled = false;
-  document.getElementById('roll-number').textContent = stage3Data.rolls.length + 1;
+  const continueOrFinish = document.getElementById('continue-or-finish');
+  if (continueOrFinish) {
+    continueOrFinish.style.display = 'none';
+  }
+
+  const rollBtn = document.getElementById('roll-button');
+  if (rollBtn) {
+    rollBtn.disabled = false;
+  }
+
+  const rollNumber = document.getElementById('roll-number');
+  if (rollNumber) {
+    rollNumber.textContent = stage3Data.rolls.length + 1;
+  }
 }
 
 function finishGame() {
   stage3Data.endTime = new Date().toISOString();
-  surveyData.gamePlay.stage3 = stage3Data;
+  window.surveyData.gamePlay.stage3 = stage3Data;
 
   // Navigate to interim story
   navigateTo('interim-story');
@@ -650,11 +743,26 @@ function saveInterimMessageAndContinue() {
   const messageTextarea = document.getElementById('interim-message');
 
   // Store the interim message in surveyData (even if empty)
-  if (!surveyData.gamePlay) {
-    surveyData.gamePlay = {};
-  }
-  surveyData.gamePlay.interimMessage = messageTextarea ? messageTextarea.value.trim() : '';
+  window.surveyData.gamePlay.interimMessage = messageTextarea ? messageTextarea.value.trim() : '';
 
   // Navigate to ending story
   navigateTo('ending-story');
+}
+
+// Notification system (survey.jsと同じ)
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+
+  document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => notification.classList.add('show'), 100);
+
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
 }

@@ -130,6 +130,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: center; /* 追加：子要素を中央揃えにする */
 }
 
 .age-input-wrapper .number-input {
@@ -269,6 +270,31 @@
 .form-actions .btn-primary {
   font-size: 1.2rem;
   padding: 1.25rem 2.5rem;
+}
+
+/* Custom styles for index.html select element */
+.form-select {
+  background: rgba(255, 255, 255, 0.1); /* .text-input と同じ背景色 */
+  color: var(--color-text-light); /* 文字色は白を維持 */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ドロップダウンメニューが開いたときのスタイル調整 */
+.form-select option {
+  background-color: var(--color-background); /* ドロップダウンの背景色 */
+  color: var(--color-text-light); /* ドロップダウンの文字色 */
+}
+
+/* ドロップダウンの項目にホバーしたときのスタイル */
+.form-select option:hover {
+  background-color: var(--color-primary); /* ホバー時の背景色 */
+  color: white; /* ホバー時の文字色 */
+}
+
+/* 選択されている項目 (一部ブラウザで適用) */
+.form-select option:checked {
+  background-color: var(--color-primary);
+  color: white;
 }
 
 /* Responsive Design */

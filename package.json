@@ -1,0 +1,25 @@
+{
+  "name": "dice-of-destiny-v3",
+  "version": "1.0.0",
+  "description": "This is the first phase of the Dice of Destiny web application. It includes the basic HTML structure, CSS styling, and JavaScript navigation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emergence-japan/dod-ver3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/emergence-japan/dod-ver3/issues"
+  },
+  "homepage": "https://github.com/emergence-japan/dod-ver3#readme",
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0"
+  }
+}

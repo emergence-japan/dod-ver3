@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>参加者情報入力 - Dice of Destiny</title>
+  <title>The Dice of Destiny</title>
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/survey.css">
@@ -15,135 +15,17 @@
 
   <div class="screen active">
     <div class="content-wrapper" style="max-width: 650px;">
-      <h1 class="title">参加者情報</h1>
-      <p class="tagline" style="margin-bottom: var(--spacing-md);">実験にご協力いただきありがとうございます。まず、以下の情報を入力してください。</p>
+      <h1 class="title">The Dice of Destiny</h1>
+      <p class="tagline" style="margin-bottom: var(--spacing-md);">コンテンツを選択してください。</p>
 
-      <div class="question-group">
-        <label for="anonymousCode" class="question-label">匿名コード</label>
-        <p class="question-help">後のアンケートで個人を特定するために使用します。半角英数字で入力してください。</p>
-        <input type="text" id="anonymousCode" name="anonymousCode" class="text-input" required>
+      <div class="navigation-buttons" style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem;">
+          <button id="goToPreSurvey" class="btn-secondary" style="width: 100%;" onclick="location.href='pre-survey.html'">事前アンケートへ</button>
+          <button id="goToGame" class="btn-secondary" style="width: 100%;" onclick="location.href='game.html'">ゲーム開始</button>
+          <button id="goToPostSurvey" class="btn-secondary" style="width: 100%;" onclick="location.href='post-survey.html'">事後アンケートへ</button>
       </div>
-
-      <div class="question-group">
-        <label for="gender" class="question-label">性別</label>
-        <select id="gender" name="gender" class="text-input form-select" required>
-          <option value="">選択してください</option>
-          <option value="male">男性</option>
-          <option value="female">女性</option>
-          <option value="other">その他</option>
-          <option value="prefer_not_to_answer">回答しない</option>
-        </select>
-      </div>
-
-      <div class="question-group">
-        <label for="age" class="question-label">年齢</label>
-        <div class="age-input-wrapper">
-            <input type="number" id="age" name="age" min="6" max="120" class="number-input" required>
-            <span class="input-suffix">歳</span>
-        </div>
-      </div>
-
-      <div class="form-actions" style="border-top: none; padding-top: 0; margin-top: var(--spacing-md);">
-        <button id="saveAndProceed" class="btn-primary">入力内容を確定する</button>
-        <button id="clearData" class="btn-secondary" style="background: #4B5563;">入力内容をクリアする</button>
-      </div>
-
-      <div class="navigation-block" style="margin-top: var(--spacing-lg); border-top: 1px solid rgba(255,255,255,0.2); padding-top: var(--spacing-md);">
-        <h2 style="font-family: 'Lora', serif; font-size: 1.2rem; color: #E5E7EB;">ページ遷移</h2>
-        <p class="question-help">参加者情報を保存すると、各ページへ移動できます。</p>
-        <div class="navigation-buttons" style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem;">
-            <button id="goToPreSurvey" class="btn-secondary" style="width: 100%;" onclick="location.href='pre-survey.html'">事前アンケートへ</button>
-            <button id="goToGame" class="btn-secondary" style="width: 100%;" onclick="location.href='game.html'">ゲーム開始</button>
-            <button id="goToPostSurvey" class="btn-secondary" style="width: 100%;" onclick="location.href='post-survey.html'">事後アンケートへ</button>
-        </div>
-    </div>
 
   </div>
 </div>
-
-  <script src="js/participant.js"></script>
-  <script>
-    // participant.js内のupdateNavigationButtonsが移動されたため、
-    // グローバルスコープに定義するか、DOMContentLoaded内で定義する
-    // index.htmlのDOMContentLoaded内で定義されているupdateNavigationButtonsを使用する
-  </script>
-  <style>
-    /* .question-group内の入力フィールドを中央に配置 */
-    /* ここから削除: .question-group .text-input, .question-group .number-input {
-      margin-left: auto;
-      margin-right: auto;
-    } */
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const anonymousCodeEl = document.getElementById('anonymousCode');
-      const genderEl = document.getElementById('gender');
-      const ageEl = document.getElementById('age');
-      const saveBtn = document.getElementById('saveAndProceed');
-      const clearBtn = document.getElementById('clearData');
-
-      // ナビゲーションボタンの有効/無効を切り替える関数
-      function updateNavigationButtons(isEnabled) {
-        document.getElementById('goToPreSurvey').disabled = !isEnabled;
-        document.getElementById('goToGame').disabled = !isEnabled;
-        document.getElementById('goToPostSurvey').disabled = !isEnabled;
-        
-        const buttons = [
-            document.getElementById('goToPreSurvey'),
-            document.getElementById('goToGame'),
-            document.getElementById('goToPostSurvey')
-        ];
-        buttons.forEach(btn => {
-            if (isEnabled) {
-                btn.style.opacity = '1';
-                btn.style.cursor = 'pointer';
-            } else {
-                btn.style.opacity = '0.5';
-                btn.style.cursor = 'not-allowed';
-            }
-        });
-      }
-      
-      // ページ読み込み時に参加者情報があればフォームに反映し、ボタンを有効化する
-      const participant = getParticipant();
-      if (participant) {
-        anonymousCodeEl.value = participant.anonymousCode;
-        genderEl.value = participant.gender;
-        ageEl.value = participant.age;
-        updateNavigationButtons(true);
-      } else {
-        updateNavigationButtons(false);
-      }
-
-      // 保存ボタンの処理
-      saveBtn.addEventListener('click', () => {
-        const participantData = {
-          anonymousCode: anonymousCodeEl.value,
-          gender: genderEl.value,
-          age: parseInt(ageEl.value, 10)
-        };
-        if (saveParticipant(participantData)) {
-          alert('参加者情報を保存しました。');
-          updateNavigationButtons(true);
-        }
-      });
-
-      // 終了ボタンの処理
-      clearBtn.addEventListener('click', () => {
-        if (confirm('ブラウザに保存された入力情報を削除して、最初からやり直します。よろしいですか？')) {
-          clearParticipant();
-          alert('情報を削除しました。');
-          // フォームをクリア
-          anonymousCodeEl.value = '';
-          genderEl.value = '';
-          ageEl.value = '';
-          // ナビゲーションを無効化
-          updateNavigationButtons(false);
-        }
-      });
-
-    });
-  </script>
 
 </body>
 </html>

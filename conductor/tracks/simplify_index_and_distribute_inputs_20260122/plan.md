@@ -13,8 +13,8 @@
 ## Phase 2: index.html の簡略化
 `index.html` から入力フォームを削除し、純粋なナビゲーションページにします。
 
-- [ ] Task: `index.html` から属性入力関連のHTML要素を削除
-- [ ] Task: `index.html` 内のJavaScriptロジックを修正し、ナビゲーションボタンを常時有効化
+- [x] Task: `index.html` から属性入力関連のHTML要素を削除 2f07367
+- [x] Task: `index.html` 内のJavaScriptロジックを修正し、ナビゲーションボタンを常時有効化 2f07367
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: index.html の簡略化' (Protocol in workflow.md)
 
 ## Phase 3: 各個別ページへの属性入力の組み込み

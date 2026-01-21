@@ -7,7 +7,7 @@
 
 - [x] Task: 属性入力フォームの共通HTMLテンプレートの作成 e7529ed
 - [x] Task: `js/participant.js` に属性情報の存在チェックとUI表示を制御する共通関数の追加 d2ce991
-- [ ] Task: 属性入力フォームのスタイリング（既存のCSSとの統合）
+- [x] Task: 属性入力フォームのスタイリング（既存のCSSとの統合） 66eb4ab
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: 共通入力UI・ロジックの準備' (Protocol in workflow.md)
 
 ## Phase 2: index.html の簡略化

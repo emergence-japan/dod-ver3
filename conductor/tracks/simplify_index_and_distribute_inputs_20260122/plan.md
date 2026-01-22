@@ -10,7 +10,7 @@
 - [x] Task: 属性入力フォームのスタイリング（既存のCSSとの統合） 66eb4ab
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: 共通入力UI・ロジックの準備' (Protocol in workflow.md)
 
-## Phase 2: index.html の簡略化
+## Phase 2: index.html の簡略化 [checkpoint: 62c573c]
 `index.html` から入力フォームを削除し、純粋なナビゲーションページにします。
 
 - [x] Task: `index.html` から属性入力関連のHTML要素を削除 2f07367

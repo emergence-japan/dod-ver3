@@ -852,25 +852,27 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #welcome, #important-notes, #opening-story-1, #opening-story-2, #opening-story-3 {
-
-
-
   background-image: url('../assets/BG01.jpg');
-
-
-
   background-size: cover;
-
-
-
   background-position: center;
+  background-attachment: fixed;
+}
 
-
-
+#welcome .screen, 
+#important-notes .screen, 
+#opening-story-1 .screen, 
+#opening-story-2 .screen, 
+#opening-story-3 .screen {
+  background: transparent;
 }
 
 #completion {
   background-image: url('../assets/BG01.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+}
+
+#completion .screen {
+  background: transparent;
 }

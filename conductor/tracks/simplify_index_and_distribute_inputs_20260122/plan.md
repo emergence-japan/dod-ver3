@@ -25,7 +25,7 @@
 - [x] Task: `post-survey.html` への属性入力UIの統合と表示制御の実装 9557db9
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: 各個別ページへの属性入力の組み込み' (Protocol in workflow.md)
 
-## Phase 4: データ連携の最終確認
+## Phase 4: データ連携の最終確認 [checkpoint: 0b339ed]
 各ページでの入力データが正しく保存され、既存の送信処理に組み込まれているかを確認します。
 
 - [x] Task: 各ページからのデータ送信時に属性情報が含まれていることを確認・修正 46c28f8

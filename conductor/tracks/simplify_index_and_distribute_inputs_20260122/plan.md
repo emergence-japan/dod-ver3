@@ -17,7 +17,7 @@
 - [x] Task: `index.html` 内のJavaScriptロジックを修正し、ナビゲーションボタンを常時有効化 2f07367
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: index.html の簡略化' (Protocol in workflow.md)
 
-## Phase 3: 各個別ページへの属性入力の組み込み
+## Phase 3: 各個別ページへの属性入力の組み込み [checkpoint: 060df30]
 事前アンケート、ゲーム、事後アンケートの各ページに属性入力機能を統合します。
 
 - [x] Task: `pre-survey.html` への属性入力UIの統合と表示制御の実装 9557db9

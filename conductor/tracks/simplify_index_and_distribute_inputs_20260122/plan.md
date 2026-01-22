@@ -20,9 +20,9 @@
 ## Phase 3: 各個別ページへの属性入力の組み込み
 事前アンケート、ゲーム、事後アンケートの各ページに属性入力機能を統合します。
 
-- [ ] Task: `pre-survey.html` への属性入力UIの統合と表示制御の実装
-- [ ] Task: `game.html` への属性入力UIの統合と表示制御の実装
-- [ ] Task: `post-survey.html` への属性入力UIの統合と表示制御の実装
+- [x] Task: `pre-survey.html` への属性入力UIの統合と表示制御の実装 9557db9
+- [x] Task: `game.html` への属性入力UIの統合と表示制御の実装 9557db9
+- [x] Task: `post-survey.html` への属性入力UIの統合と表示制御の実装 9557db9
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: 各個別ページへの属性入力の組み込み' (Protocol in workflow.md)
 
 ## Phase 4: データ連携の最終確認

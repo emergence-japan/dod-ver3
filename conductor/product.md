@@ -14,8 +14,8 @@ Dice of Destiny is a research-oriented web application consisting of a game and 
 
 ## Functional Features
 - **Standalone Game Experience:** A fully functional, standalone version of the "Dice of Destiny" game.
-- **Unified Integrated Flow (Ver3):** A central landing page that captures demographic information once and orchestrates the transition between surveys and the game.
-- **Automated Data Integration:** Reliable, automated submission of all user-generated data to a backend Google Spreadsheet.
+ - **Unified Integrated Flow (Ver3):** A central landing page that captures demographic information once and orchestrates the transition between surveys and the game.
+- **Distributed Participant Input (Ver3):** Participant demographic information (anonymous code, gender, age) is now collected dynamically within each content page (pre-survey, game, post-survey) as needed, rather than solely on a central landing page. The central landing page (`index.html`) now serves purely as a navigation hub.- **Automated Data Integration:** Reliable, automated submission of all user-generated data to a backend Google Spreadsheet.
 
 ## Non-Functional Requirements
 - **Data Integrity:** Guarantee that participant demographic information is consistently and accurately linked to their specific game and survey responses.

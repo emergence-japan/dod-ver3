@@ -10,7 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-</head><body>
+<body>
+
+  <div id="participant-input-container"></div>
 
   <section id="post-survey" class="screen">
     <div class="content-wrapper survey-wrapper">
@@ -1012,20 +1014,17 @@
     </div>
   </section>
   <script src="js/participant.js"></script>
+  <script src="js/input-form.js"></script>
   <script src="js/submit.js"></script>
   <script src="js/survey.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // ガード機能: participant情報がない場合はindex.htmlにリダイレクト
-      const participant = getParticipant();
-      if (!participant) {
-        location.replace('index.html');
-        return; // リダイレクト後なので以降の処理は不要
-      }
+      const container = document.getElementById('participant-input-container');
 
-      // 質問項目を非表示にしたため、自動入力処理は不要
-      
-      document.getElementById('post-survey').classList.add('active');
+      requireParticipantOrInput(container, () => {
+        // 属性情報が確認できたらアンケートを表示
+        document.getElementById('post-survey').classList.add('active');
+      });
     });
   </script>
 </body>

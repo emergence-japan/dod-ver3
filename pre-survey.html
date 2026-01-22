@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  <div id="participant-input-container"></div>
+
   <section id="pre-survey" class="screen">
     <div class="content-wrapper survey-wrapper">
       <h2>事前アンケート</h2>
@@ -697,20 +699,17 @@
     </div>
   </section>
   <script src="js/participant.js"></script>
+  <script src="js/input-form.js"></script>
   <script src="js/submit.js"></script>
   <script src="js/survey.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // ガード機能: participant情報がない場合はindex.htmlにリダイレクト
-      const participant = getParticipant();
-      if (!participant) {
-        location.replace('index.html');
-        return; // リダイレクト後なので以降の処理は不要
-      }
-
-      // 質問項目を非表示にしたため、自動入力処理は不要
-
-      document.getElementById('pre-survey').classList.add('active');
+      const container = document.getElementById('participant-input-container');
+      
+      requireParticipantOrInput(container, () => {
+        // 属性情報が確認できたらアンケートを表示
+        document.getElementById('pre-survey').classList.add('active');
+      });
     });
   </script>
 </body>

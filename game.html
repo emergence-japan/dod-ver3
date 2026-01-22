@@ -15,7 +15,9 @@
 
 <body>
 
-  <section id="welcome" class="screen active">
+  <div id="participant-input-container"></div>
+
+  <section id="welcome" class="screen">
     <div class="content-wrapper">
       <h1 class="title">The Dice of Destiny</h1>
 
@@ -522,27 +524,26 @@
   </section>
 
   <script src="js/participant.js"></script>
+  <script src="js/input-form.js"></script>
   <script src="js/submit.js"></script>
   <script src="js/app.js"></script>
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ガード機能: participant情報がない場合はindex.htmlにリダイレクト
-      const participant = getParticipant();
-      if (!participant) {
-        location.replace('index.html');
-        return; // リダイレクト後なので以降の処理は不要
-      }
+      const container = document.getElementById('participant-input-container');
 
-      // ウェルカムメッセージの表示
-      const welcomeMessageEl = document.getElementById('welcome-message');
-      if (welcomeMessageEl) {
-        welcomeMessageEl.innerHTML = `<p class="subtitle" style="color: white;">ようこそ, <strong style="color: var(--color-primary);">${participant.anonymousCode}</strong> さん</p>`;
-      }
-      
-      // app.jsのstartNewGameをparticipant情報で初期化するようにする
-      // この時点ではstudent-nameのインプットは存在しない
-      // gameState.studentName = participant.anonymousCode;
+      requireParticipantOrInput(container, () => {
+        const participant = getParticipant();
+        
+        // ウェルカムメッセージの表示
+        const welcomeMessageEl = document.getElementById('welcome-message');
+        if (welcomeMessageEl) {
+          welcomeMessageEl.innerHTML = `<p class="subtitle" style="color: white;">ようこそ, <strong style="color: var(--color-primary);">${participant.anonymousCode}</strong> さん</p>`;
+        }
+        
+        // 最初の画面を表示
+        document.getElementById('welcome').classList.add('active');
+      });
     });
   </script>
 </body>

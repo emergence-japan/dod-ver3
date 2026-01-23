@@ -17,8 +17,8 @@ describe('Participant Logic', () => {
   });
 
   beforeEach(() => {
-    // Clear localStorage
-    localStorage.clear();
+    // Clear sessionStorage
+    sessionStorage.clear();
     
     // Mock renderAttributeInput (global)
     window.renderAttributeInput = jest.fn((container) => {
@@ -31,7 +31,7 @@ describe('Participant Logic', () => {
 
   test('requireParticipantOrInput should execute callback if participant exists', () => {
     // Setup existing participant
-    localStorage.setItem('participant', JSON.stringify({
+    sessionStorage.setItem('participant', JSON.stringify({
         anonymousCode: 'EXISTING', gender: 'male', age: 20
     }));
 
@@ -72,7 +72,7 @@ describe('Participant Logic', () => {
      btn.click();
      
      // Check save
-     const saved = JSON.parse(localStorage.getItem('participant'));
+     const saved = JSON.parse(sessionStorage.getItem('participant'));
      expect(saved).not.toBeNull();
      expect(saved.anonymousCode).toBe('TEST');
      

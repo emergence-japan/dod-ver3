@@ -3,16 +3,16 @@
 const PARTICIPANT_KEY = 'participant';
 
 /**
- * 参加者情報をlocalStorageから取得します。
+ * 参加者情報をsessionStorageから取得します。
  * @returns {object | null} 参加者情報オブジェクト、または存在しない場合はnull。
  */
 function getParticipant() {
-  const participantData = localStorage.getItem(PARTICIPANT_KEY);
+  const participantData = sessionStorage.getItem(PARTICIPANT_KEY);
   return participantData ? JSON.parse(participantData) : null;
 }
 
 /**
- * 参加者情報をlocalStorageに保存します。
+ * 参加者情報をsessionStorageに保存します。
  * @param {object} participantData - 保存する参加者情報。
  * @param {string} participantData.anonymousCode - 匿名コード。
  * @param {string} participantData.gender - 性別。
@@ -24,15 +24,15 @@ function saveParticipant(participantData) {
     alert('すべての項目を入力してください。');
     return false;
   }
-  localStorage.setItem(PARTICIPANT_KEY, JSON.stringify(participantData));
+  sessionStorage.setItem(PARTICIPANT_KEY, JSON.stringify(participantData));
   return true;
 }
 
 /**
- * 参加者情報をlocalStorageから削除します。
+ * 参加者情報をsessionStorageから削除します。
  */
 function clearParticipant() {
-  localStorage.removeItem(PARTICIPANT_KEY);
+  sessionStorage.removeItem(PARTICIPANT_KEY);
 }
 
 /**
